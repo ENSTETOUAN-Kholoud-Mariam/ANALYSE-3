@@ -1,0 +1,2537 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Analyse 3 — Cours Complet L1</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+<style>
+:root {
+  --bg: #0f0f13;
+  --bg2: #16161c;
+  --bg3: #1e1e28;
+  --bg4: #252532;
+  --card: #1a1a24;
+  --border: #2e2e3e;
+  --border2: #3a3a4e;
+  --text: #e8e6f0;
+  --muted: #8a8aa0;
+  --accent: #7c6af7;
+  --accent2: #a78bfa;
+  --gold: #f0c96a;
+  --gold2: #fde68a;
+  --teal: #34d9b3;
+  --teal2: #6ee7cf;
+  --rose: #f87171;
+  --rose2: #fca5a5;
+  --sky: #60a5fa;
+  --sky2: #93c5fd;
+  --orange: #fb923c;
+  --green: #4ade80;
+  --serif: 'Crimson Pro', Georgia, serif;
+  --sans: 'Outfit', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+/* ── MODE CLAIR ── */
+body.light-mode {
+  --bg: #f5f4fb;
+  --bg2: #edeaf8;
+  --bg3: #e4e0f5;
+  --bg4: #d8d4ee;
+  --card: #edeaf8;
+  --border: #c8c2e8;
+  --border2: #b8b0e0;
+  --text: #1a1828;
+  --muted: #6660a0;
+  --accent: #5b4fd8;
+  --accent2: #7c6af7;
+  --gold: #b8860b;
+  --gold2: #c8960f;
+  --teal: #0d9488;
+  --teal2: #0f766e;
+  --rose: #dc2626;
+  --rose2: #b91c1c;
+  --sky: #2563eb;
+  --sky2: #1d4ed8;
+  --orange: #c2410c;
+  --green: #15803d;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+/* ── NAVIGATION ── */
+nav {
+  position: fixed; top: 0; left: 0; width: 260px; height: 100vh;
+  background: var(--bg2); border-right: 1px solid var(--border);
+  overflow-y: auto; z-index: 100; padding: 1.5rem 0;
+}
+
+.nav-logo {
+  padding: 0 1.5rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1rem;
+}
+.nav-logo .tag { font-size: 11px; font-weight: 600; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; }
+.nav-logo h1 { font-family: var(--serif); font-size: 1.5rem; font-weight: 600; color: var(--text); line-height: 1.2; margin-top: 4px; }
+
+.nav-section { padding: 0.25rem 1.5rem; margin-top: 0.5rem; }
+.nav-section span { font-size: 10px; font-weight: 700; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; }
+
+nav a {
+  display: block; padding: 0.45rem 1.5rem;
+  color: var(--muted); text-decoration: none; font-size: 13.5px;
+  transition: all 0.2s; border-left: 2px solid transparent;
+}
+nav a:hover { color: var(--text); background: var(--bg3); }
+nav a.active { color: var(--accent2); border-left-color: var(--accent); background: rgba(124,106,247,0.08); }
+
+/* ── MAIN CONTENT ── */
+main {
+  margin-left: 260px;
+  max-width: 960px;
+  padding: 3rem 4rem 6rem;
+}
+
+/* ── HERO ── */
+.hero {
+  padding: 4rem 0 3rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 3rem;
+}
+.hero .badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(124,106,247,0.12); border: 1px solid rgba(124,106,247,0.3);
+  color: var(--accent2); padding: 6px 14px; border-radius: 100px;
+  font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.hero h1 {
+  font-family: var(--serif); font-size: 3.5rem; font-weight: 600;
+  line-height: 1.1; color: var(--text);
+  background: linear-gradient(135deg, var(--text), var(--accent2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+}
+.hero .subtitle {
+  font-size: 1.2rem; color: var(--muted); max-width: 600px;
+  font-family: var(--serif); font-style: italic; font-weight: 300;
+}
+.hero-meta {
+  display: flex; gap: 2rem; margin-top: 2rem;
+  padding-top: 2rem; border-top: 1px solid var(--border);
+}
+.hero-meta .item { }
+.hero-meta .item .label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+.hero-meta .item .val { font-size: 14px; color: var(--text); font-weight: 500; margin-top: 2px; }
+
+/* ── TYPOGRAPHY ── */
+h2 {
+  font-family: var(--serif); font-size: 2rem; font-weight: 600;
+  color: var(--text); margin: 3rem 0 1.5rem;
+  padding-bottom: 0.75rem; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 0.75rem;
+}
+h2 .chapter-num {
+  font-size: 0.75rem; font-family: var(--sans); font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--accent); background: rgba(124,106,247,0.12);
+  border: 1px solid rgba(124,106,247,0.25);
+  padding: 3px 10px; border-radius: 100px;
+}
+
+h3 {
+  font-family: var(--serif); font-size: 1.4rem; font-weight: 600;
+  color: var(--text); margin: 2.5rem 0 1rem;
+  display: flex; align-items: center; gap: 0.6rem;
+}
+h3::before {
+  content: ''; display: inline-block;
+  width: 3px; height: 1.2em; background: var(--gold);
+  border-radius: 2px; flex-shrink: 0;
+}
+
+h4 {
+  font-size: 1rem; font-weight: 600; color: var(--text);
+  margin: 1.5rem 0 0.5rem; text-transform: uppercase; letter-spacing: 1px; font-family: var(--sans);
+}
+
+p { color: var(--text); margin-bottom: 1rem; font-size: 16px; }
+p.lead { font-family: var(--serif); font-size: 1.15rem; font-weight: 300; color: var(--muted); }
+
+strong { color: var(--gold2); font-weight: 600; }
+em { font-family: var(--serif); font-style: italic; color: var(--teal2); }
+code { font-family: var(--mono); font-size: 14px; background: var(--bg4); padding: 2px 8px; border-radius: 4px; color: var(--accent2); }
+
+/* ── MATH BLOCKS ── */
+.math-block {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 10px; padding: 1.25rem 1.5rem;
+  margin: 1.25rem 0; overflow-x: auto;
+  font-size: 1.05rem;
+}
+.math-block.centered { text-align: center; }
+
+/* ── CALLOUT BOXES ── */
+.callout {
+  border-radius: 10px; padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0; border-left: 4px solid;
+  position: relative; overflow: hidden;
+}
+.callout::before {
+  font-size: 11px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; display: block; margin-bottom: 0.5rem;
+}
+
+.callout.theorem {
+  background: rgba(124,106,247,0.08); border-color: var(--accent);
+}
+.callout.theorem::before { content: '📐 Théorème'; color: var(--accent2); }
+
+.callout.definition {
+  background: rgba(52,217,179,0.07); border-color: var(--teal);
+}
+.callout.definition::before { content: '📖 Définition'; color: var(--teal2); }
+
+.callout.proof {
+  background: rgba(240,201,106,0.06); border-color: var(--gold);
+}
+.callout.proof::before { content: '✏️ Démonstration'; color: var(--gold2); }
+.callout.proof::after {
+  content: '∎'; position: absolute; bottom: 0.75rem; right: 1.25rem;
+  color: var(--gold); font-size: 1.1rem;
+}
+
+.callout.example {
+  background: rgba(96,165,250,0.07); border-color: var(--sky);
+}
+.callout.example::before { content: '🔍 Exemple'; color: var(--sky2); }
+
+.callout.warning {
+  background: rgba(248,113,113,0.07); border-color: var(--rose);
+}
+.callout.warning::before { content: '⚠️ Attention'; color: var(--rose2); }
+
+.callout.remark {
+  background: rgba(251,146,60,0.07); border-color: var(--orange);
+}
+.callout.remark::before { content: '💡 Remarque'; color: var(--orange); }
+
+.callout.method {
+  background: rgba(74,222,128,0.06); border-color: var(--green);
+}
+.callout.method::before { content: '⚙️ Méthode'; color: var(--green); }
+
+.callout p:last-child { margin-bottom: 0; }
+.callout p { margin-bottom: 0.5rem; }
+
+/* ── TABLEAU USUEL ── */
+.dl-table-wrap { overflow-x: auto; margin: 1.5rem 0; }
+table {
+  width: 100%; border-collapse: collapse;
+  font-size: 14.5px;
+}
+th {
+  background: var(--bg4); color: var(--accent2);
+  padding: 0.75rem 1rem; text-align: left;
+  font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px;
+  font-weight: 700; border-bottom: 1px solid var(--border2);
+}
+td {
+  padding: 0.7rem 1rem; border-bottom: 1px solid var(--border);
+  font-family: var(--mono); font-size: 13.5px; color: var(--text);
+  vertical-align: middle;
+}
+tr:hover td { background: var(--bg3); }
+td:first-child { color: var(--teal2); }
+
+/* ── GRID ── */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin: 1.5rem 0; }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+
+/* ── MINI CARD ── */
+.mini-card {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 10px; padding: 1.25rem;
+}
+.mini-card h4 { margin-top: 0; color: var(--gold2); font-size: 13px; }
+
+/* ── SVG DIAGRAMS ── */
+.diagram-wrap {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.5rem;
+  margin: 1.5rem 0; overflow: hidden;
+}
+.diagram-title {
+  font-size: 12px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 1rem;
+}
+
+/* ── BETISIER ── */
+.error-card {
+  background: var(--bg3); border: 1px solid rgba(248,113,113,0.3);
+  border-radius: 10px; padding: 1.25rem 1.5rem;
+  margin-bottom: 1rem;
+}
+.error-card .error-title {
+  color: var(--rose2); font-weight: 700; font-size: 15px;
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 0.5rem;
+}
+.error-card .wrong { color: var(--rose); font-family: var(--mono); font-size: 13px; display: block; margin: 0.5rem 0; }
+.error-card .right { color: var(--green); font-family: var(--mono); font-size: 13px; display: block; }
+
+/* ── TOC PILL ── */
+.toc {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.5rem;
+  margin: 2rem 0;
+}
+.toc h3::before { display: none; }
+.toc h3 { font-family: var(--sans); font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 1rem; }
+.toc ol { list-style: none; counter-reset: toc-counter; }
+.toc li { counter-increment: toc-counter; padding: 0.4rem 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 0.75rem; }
+.toc li:last-child { border-bottom: none; }
+.toc li::before { content: counter(toc-counter,'decimal-leading-zero'); font-size: 11px; color: var(--accent); font-weight: 700; font-family: var(--mono); }
+.toc a { color: var(--text); text-decoration: none; font-size: 15px; }
+.toc a:hover { color: var(--accent2); }
+
+/* ── HISTORY QUOTE ── */
+.quote-block {
+  border-left: 3px solid var(--gold); padding: 1rem 1.5rem;
+  margin: 1.5rem 0; background: rgba(240,201,106,0.05);
+  border-radius: 0 8px 8px 0;
+}
+.quote-block p { font-family: var(--serif); font-style: italic; font-size: 1.1rem; color: var(--muted); margin-bottom: 0.25rem; }
+.quote-block .attr { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+
+/* ── SEPARATOR ── */
+.sep { border: none; border-top: 1px solid var(--border); margin: 3rem 0; }
+
+/* ── PRINT / RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { display: none; }
+  main { margin-left: 0; padding: 1.5rem; }
+  .two-col, .three-col { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 2.2rem; }
+  .hero-meta { flex-wrap: wrap; gap: 1rem; }
+}
+
+/* ── THEME TOGGLE BUTTON ── */
+#theme-btn {
+  position: fixed; bottom : 2rem; right: 16rem; z-index: 999;
+  display: flex; align-items: center; gap: 8px;
+  background: var(--bg3); color: var(--text);
+  border: 1px solid var(--border2); border-radius: 50px;
+  padding: 0.75rem 1.25rem; font-family: var(--sans); font-size: 14px; font-weight: 600;
+  cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  transition: all 0.25s; letter-spacing: 0.5px;
+}
+#theme-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.25); border-color: var(--accent); color: var(--accent2); }
+
+/* ── PDF DOWNLOAD BUTTON ── */
+#pdf-btn {
+  position: fixed; bottom: 2rem; right: 2rem; z-index: 999;
+  display: flex; align-items: center; gap: 10px;
+  background: linear-gradient(135deg, #7c6af7, #a78bfa);
+  color: #fff; border: none; border-radius: 50px;
+  padding: 0.75rem 1.5rem; font-family: var(--sans); font-size: 14px; font-weight: 600;
+  cursor: pointer; box-shadow: 0 4px 24px rgba(124,106,247,0.45);
+  transition: all 0.25s; letter-spacing: 0.5px;
+}
+#pdf-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(124,106,247,0.55); }
+#pdf-btn svg { flex-shrink: 0; }
+
+/* ── EXERCISES ── */
+.exercise-card {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;
+}
+.exercise-card .ex-header {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 1rem;
+}
+.exercise-card .ex-num {
+  background: rgba(124,106,247,0.15); border: 1px solid rgba(124,106,247,0.3);
+  color: var(--accent2); font-weight: 700; font-size: 12px; font-family: var(--mono);
+  padding: 4px 12px; border-radius: 100px; white-space: nowrap;
+}
+.exercise-card .ex-title { font-weight: 600; font-size: 1rem; color: var(--gold2); }
+.exercise-card .ex-diff {
+  margin-left: auto; font-size: 11px; font-weight: 700; letter-spacing: 1px;
+  padding: 3px 10px; border-radius: 100px; text-transform: uppercase;
+}
+.ex-diff.easy { background: rgba(74,222,128,0.1); color: var(--green); border: 1px solid rgba(74,222,128,0.25); }
+.ex-diff.medium { background: rgba(240,201,106,0.1); color: var(--gold); border: 1px solid rgba(240,201,106,0.25); }
+.ex-diff.hard { background: rgba(248,113,113,0.1); color: var(--rose); border: 1px solid rgba(248,113,113,0.25); }
+
+.ex-hint {
+  margin-top: 1rem; border-top: 1px solid var(--border); padding-top: 1rem;
+  display: none;
+}
+.ex-hint.visible { display: block; }
+.hint-btn {
+  background: none; border: 1px solid var(--border2); color: var(--muted);
+  font-family: var(--sans); font-size: 12px; font-weight: 600;
+  padding: 4px 14px; border-radius: 100px; cursor: pointer;
+  transition: all 0.2s; margin-top: 0.75rem;
+}
+.hint-btn:hover { border-color: var(--accent); color: var(--accent2); }
+
+/* ── RÉSUMÉ ── */
+.summary-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0;
+}
+.summary-item {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 10px; padding: 1.25rem;
+}
+.summary-item h4 { color: var(--teal2); margin-bottom: 0.5rem; font-size: 13.5px; }
+.summary-item ul { list-style: none; padding: 0; }
+.summary-item ul li { font-size: 13.5px; color: #b8b6c8; padding: 0.25rem 0; border-bottom: 1px solid var(--border); }
+.summary-item ul li:last-child { border-bottom: none; }
+.summary-item ul li::before { content: '→ '; color: var(--accent); font-weight: 700; }
+
+/* ── PRINT STYLES ── */
+@media print {
+  nav, #pdf-btn, .controls, canvas { display: none !important; }
+  main { margin-left: 0 !important; padding: 1.5rem !important; max-width: 100% !important; }
+  body { background: #fff !important; color: #111 !important; }
+  :root {
+    --bg: #fff; --bg2: #f5f5f5; --bg3: #f0f0f5; --bg4: #e8e8f0;
+    --text: #111; --muted: #555; --border: #ddd; --border2: #ccc;
+  }
+  .callout, .mini-card, .exercise-card, .summary-item { break-inside: avoid; }
+  h2, h3 { break-after: avoid; }
+  .hero h1 { font-size: 2rem; }
+}
+
+/* ── INTERACTIVE TAYLOR ── */
+#taylor-canvas { width: 100%; height: 300px; background: var(--bg); border-radius: 8px; }
+.controls { display: flex; align-items: center; gap: 16px; margin-top: 1rem; flex-wrap: wrap; }
+.controls label { font-size: 13px; color: var(--muted); }
+.controls input[type=range] { width: 160px; accent-color: var(--accent); }
+.controls output { font-family: var(--mono); font-size: 13px; color: var(--accent2); min-width: 2rem; }
+.controls select { background: var(--bg4); border: 1px solid var(--border2); color: var(--text); padding: 4px 8px; border-radius: 6px; font-size: 13px; }
+
+.legend { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.75rem; }
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+.legend-dot { width: 16px; height: 3px; border-radius: 2px; }
+
+/* ── CURVE CANVAS ── */
+#curve-canvas { width: 100%; height: 300px; background: var(--bg); border-radius: 8px; }
+</style>
+</head>
+<body>
+
+<!-- ═══ BOUTON THÈME ═══ -->
+<button id="theme-btn" onclick="toggleTheme()" title="Changer le thème">
+  <span id="theme-icon">☀️</span>
+  <span id="theme-label">Mode clair</span>
+</button>
+
+<!-- ═══ BOUTON TÉLÉCHARGEMENT PDF ═══ -->
+<button id="pdf-btn" onclick="downloadPDF()" title="Télécharger en PDF">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+    <polyline points="7 10 12 15 17 10"/>
+    <line x1="12" y1="15" x2="12" y2="3"/>
+  </svg>
+  Télécharger en PDF
+</button>
+
+<!-- ═══ NAVIGATION ═══ -->
+<nav>
+  <div class="nav-logo">
+    <div class="tag">Mathématiques L1</div>
+    <h1>Analyse 3</h1>
+  </div>
+  <div class="nav-section"><span>Préambule</span></div>
+  <a href="#intro">Introduction</a>
+  <a href="#histoire">Contexte historique</a>
+  <div class="nav-section"><span>Chapitre 0</span></div>
+  <a href="#trigo">Trigonométrie</a>
+  <a href="#circ">Fonctions circulaires réciproques</a>
+  <a href="#hyp">Fonctions hyperboliques</a>
+  <a href="#rolle">Théorème de Rolle</a>
+  <a href="#taf">Accroissements Finis (TAF)</a>
+  <a href="#fi">Formes indéterminées</a>
+  <a href="#limites-usuelles">Limites usuelles</a>
+  <a href="#croissances">Croissances comparées</a>
+  <a href="#leibniz">Formule de Leibniz</a>
+  <div class="nav-section"><span>Chapitre 1</span></div>
+  <a href="#formules-taylor">Formules de Taylor</a>
+  <a href="#dl-def">DL : définition et tableau</a>
+  <a href="#dl-ops">Opérations sur les DL</a>
+  <a href="#dl-apps">Applications</a>
+  <div class="nav-section"><span>Chapitre 2</span></div>
+  <a href="#param-def">Courbes paramétrées</a>
+  <a href="#param-etude">Étude locale</a>
+  <a href="#param-branches">Branches infinies</a>
+  <a href="#param-methode">Méthode complète</a>
+  <div class="nav-section"><span>Annexes</span></div>
+  <a href="#betisier">Bêtisier</a>
+  <a href="#conclusion">Conclusion</a>
+  <div class="nav-section"><span>Fin de cours</span></div>
+  <a href="#resume">📋 Résumé</a>
+  <a href="#exercices">✏️ Exercices (20 exercices)</a>
+  <div class="nav-section"><span>Crédits</span></div>
+  <a href="#credits">🏛️ ENS Tétouan</a>
+</nav>
+
+<!-- ═══ MAIN ═══ -->
+<main>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="badge">📚 Cours Magistral · Licence 1 · Semestre 2</div>
+  <h1>Analyse 3</h1>
+  <p class="subtitle">Développements limités, formules de Taylor et courbes paramétrées planes</p>
+  <div class="hero-meta">
+    <div class="item"><div class="label">Niveau</div><div class="val">L1 — Première année</div></div>
+    <div class="item"><div class="label">Chapitres</div><div class="val">2 + Prérequis</div></div>
+    <div class="item"><div class="label">Objectif</div><div class="val">Analyse locale des fonctions</div></div>
+    <div class="item"><div class="label">Prérequis</div><div class="val">Analyse 1 &amp; 2, Algèbre</div></div>
+  </div>
+  <div style="margin-top:2rem; padding:1.25rem 1.5rem; background:rgba(124,106,247,0.06); border:1px solid rgba(124,106,247,0.2); border-radius:12px; display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.5rem;">
+    <div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;">🏛️ Université</div>
+      <div style="font-size:15px;font-weight:600;color:var(--text);">ENS Tétouan</div>
+      <div style="font-size:12px;color:var(--muted);">École Normale Supérieure</div>
+    </div>
+    <div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;">✏️ Productrices</div>
+      <div style="font-size:14px;font-weight:600;color:var(--accent2);">ED-DAHBY Kholoud</div>
+      <div style="font-size:14px;font-weight:600;color:var(--accent2);">HAYOUNE Mariam</div>
+    </div>
+    <div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;">🎓 Encadrant</div>
+      <div style="font-size:14px;font-weight:600;color:var(--gold2);">ACHTOUN Youssef</div>
+      <div style="font-size:12px;color:var(--muted);">Enseignant-chercheur</div>
+    </div>
+  </div>
+</div>
+
+<!-- TABLE DES MATIÈRES -->
+<div class="toc">
+  <h3>Table des matières</h3>
+  <ol>
+    <li><a href="#intro">Introduction et objectifs du cours</a></li>
+    <li><a href="#histoire">Contexte historique détaillé</a></li>
+    <li><a href="#ch1">Chapitre 1 — La Boîte à Outils</a></li>
+    <li><a href="#ch2">Chapitre 2 — Formules de Taylor et Développements Limités</a></li>
+    <li><a href="#ch3">Chapitre 3 — Courbes Paramétrées Planes</a></li>
+    <li><a href="#betisier">Bêtisier — Les erreurs fréquentes</a></li>
+    <li><a href="#conclusion">Conclusion et perspectives</a></li>
+    <li><a href="#resume">📋 Résumé et aide-mémoire</a></li>
+    <li><a href="#exercices">✏️ Exercices (20 exercices progressifs)</a></li>
+    <li><a href="#credits">🏛️ Crédits — ENS Tétouan</a></li>
+  </ol>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     INTRODUCTION
+═══════════════════════════════════════════════════════ -->
+<section id="intro">
+<h2><span class="chapter-num">Intro</span> Philosophie et objectifs du cours</h2>
+
+<p class="lead">En Analyse 1 et 2, vous avez appris à étudier des fonctions <em>globalement</em> : domaine de définition, variations, limites, continuité, dérivabilité. C'est le regard de l'aigle — large, panoramique, souverain.</p>
+
+<p>L'Analyse 3 vous invite à changer radicalement de posture : celle de l'horloger. Vous allez placer votre loupe sur un point précis et comprendre le comportement <strong>infiniment local</strong> d'une fonction en ce point. Ce passage du global au local est l'une des idées les plus profondes et les plus fertiles de toute l'analyse mathématique.</p>
+
+<div class="callout remark">
+<p><strong>L'idée centrale :</strong> Toute fonction "raisonnable" ressemble, près d'un point, à un <em>polynôme</em>. Plus on autorise un polynôme de degré élevé, meilleure est l'approximation. Ce polynôme s'appelle le <strong>développement limité</strong> (DL).</p>
+</div>
+
+<h3>Pourquoi approcher par des polynômes ?</h3>
+
+<p>Les polynômes sont les fonctions les plus simples qui existent : faciles à évaluer, à dériver, à intégrer. L'idée de Taylor est audacieuse — puisque les polynômes sont si commodes, cherchons à <em>transformer</em> temporairement toute fonction en polynôme, au voisinage d'un point. C'est la clé de voûte de ce cours.</p>
+
+<div class="two-col">
+  <div class="mini-card">
+    <h4>🎯 Pourquoi les DL ?</h4>
+    <p style="font-size:14.5px">Un polynôme \(P(x) = a_0 + a_1 x + \cdots + a_n x^n\) est complètement déterminé par ses <em>dérivées en 0</em>. Connaître \(f^{(k)}(0)\) pour \(k = 0, \ldots, n\) suffit à construire la meilleure approximation polynomiale d'ordre \(n\) de \(f\).</p>
+  </div>
+  <div class="mini-card">
+    <h4>⚡ Efficacité pratique</h4>
+    <p style="font-size:14.5px">Calculer \(\lim_{x\to 0}\frac{\sin x - x}{x^3}\) sans DL demande des tours de passe-passe. Avec le DL de \(\sin x\), c'est immédiat : on lit le résultat \(-\frac{1}{6}\) directement dans les coefficients.</p>
+  </div>
+</div>
+
+<p>Ce cours a deux conséquences majeures que vous allez exploiter tout au long du semestre :</p>
+
+<div class="two-col">
+  <div class="mini-card">
+    <h4>📏 Calcul de limites</h4>
+    <p style="font-size:14.5px">Les formes indéterminées du type \(\frac{0}{0}\) ou \(\infty - \infty\) résistent souvent aux règles usuelles. Les DL les dissolvent systématiquement.</p>
+  </div>
+  <div class="mini-card">
+    <h4>🌀 Étude de courbes</h4>
+    <p style="font-size:14.5px">Les courbes paramétrées planes, issues de la physique (trajectoires), se comprennent parfaitement grâce à l'analyse locale en chaque point.</p>
+  </div>
+</div>
+
+<h3>Ce que vous saurez faire à la fin de ce cours</h3>
+
+<div class="callout method">
+<p><strong>Compétences visées :</strong></p>
+<p>✅ Calculer le DL d'une fonction usuelle ou composée à tout ordre en tout point.</p>
+<p>✅ Lever toute forme indéterminée à l'aide des DL.</p>
+<p>✅ Trouver l'équation d'une tangente, d'une asymptote à une courbe paramétrée.</p>
+<p>✅ Classifier les points singuliers d'une courbe paramétrée (rebroussements, inflexions).</p>
+<p>✅ Réduire le domaine d'étude d'une courbe par les symétries.</p>
+<p>✅ Mener une étude complète d'une courbe paramétrée et la tracer.</p>
+</div>
+
+<div class="callout warning">
+<p><strong>Pré-requis indispensables :</strong> Ce cours suppose la maîtrise solide des dérivées des fonctions usuelles (\(\sin, \cos, \exp, \ln, x^\alpha\)), des règles de calcul (produit, quotient, chaîne), et des limites classiques. Un doute ? Revoyez Analyse 1 et 2 avant de commencer.</p>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     HISTOIRE
+═══════════════════════════════════════════════════════ -->
+<section id="histoire">
+<h2><span class="chapter-num">Hist.</span> Contexte historique</h2>
+
+<p class="lead">Les mathématiques ne naissent pas dans le vide. Derrière chaque formule, il y a une histoire humaine fascinante, faite de rivalités, d'intuitions géniales et parfois d'injustices. Comprendre cette histoire, c'est comprendre pourquoi les outils ont été inventés — ce qui aide à les maîtriser.</p>
+
+<div class="quote-block">
+  <p>"Nature and Nature's laws lay hid in night; God said, Let Newton be! and all was light."</p>
+  <div class="attr">— Alexander Pope, épitaphe pour Isaac Newton</div>
+</div>
+
+<h3>Les pionniers du calcul infinitésimal</h3>
+
+<p><strong>Isaac Newton (1643–1727)</strong> et <strong>Gottfried Leibniz (1646–1716)</strong>, indépendamment, inventent le calcul différentiel et intégral dans les années 1660–1680. La rivalité entre leurs deux écoles marquera durablement la mathématique européenne — les Britanniques restant fidèles aux notations de Newton pendant un siècle, freinant leur propre développement face aux Continentaux qui adoptèrent les notations plus souples de Leibniz.</p>
+
+<p>Newton, animé par la physique de son temps (chute des corps, orbites planétaires), développe les premières idées de développement en série pour calculer des aires et résoudre des équations différentielles. Son intuition était que les fonctions, comme les courbes géométriques, pouvaient être "développées" en séries infinies de puissances.</p>
+
+<div class="callout remark">
+<p><strong>La querelle de priorité Newton-Leibniz</strong> est l'un des épisodes les plus dramatiques de l'histoire des sciences. Newton avait développé son calcul vers 1666, mais ne le publia qu'en 1687. Leibniz, de son côté, publia indépendamment en 1684. Les partisans de chaque camp s'accusèrent mutuellement de plagiat. Aujourd'hui, les historiens s'accordent sur une découverte parallèle et indépendante.</p>
+</div>
+
+<h3>Brook Taylor et la formule fondamentale</h3>
+
+<p><strong>Brook Taylor (1685–1731)</strong> formalise en 1715 la formule qui porte son nom dans son ouvrage <em>Methodus Incrementorum Directa et Inversa</em>. Son idée profonde : approcher une fonction par un polynôme construit à partir de ses dérivées successives en un point. Taylor avait seulement 29 ans lors de cette publication. Malheureusement, son importance ne fut reconnue que des décennies plus tard, notamment grâce aux travaux de Lagrange et Cauchy qui lui donnèrent une base rigoureuse.</p>
+
+<p><strong>Colin Maclaurin (1698–1746)</strong>, mathématicien écossais élève de Newton, popularise le cas particulier des développements autour de 0 dans son <em>Treatise of Fluxions</em> (1742). Ces développements portent aujourd'hui son nom — bien que Taylor l'ait précédé de 27 ans !</p>
+
+<div class="two-col">
+<div class="mini-card">
+  <h4>🍎 Newton et la cinématique</h4>
+  <p style="font-size:14.5px">Newton utilise la notion de fluxions (dérivées) pour décrire le mouvement. La position \(x(t)\) d'un objet s'approche localement par :<br/>\[x(t_0+h) \approx x(t_0) + h\,\dot{x}(t_0) + \frac{h^2}{2}\ddot{x}(t_0)\]<br/>C'est exactement un DL d'ordre 2 — la base de toute la mécanique classique !</p>
+</div>
+<div class="mini-card">
+  <h4>🔭 Galilée et les courbes paramétrées</h4>
+  <p style="font-size:14.5px"><strong>Galilée (1564–1642)</strong> montre que la trajectoire d'un projectile est une parabole. C'est la première courbe paramétrée étudiée scientifiquement : \(x = v_0 t\), \(y = \frac{1}{2}g t^2\). Il résout ainsi un problème de tir d'artillerie qui avait résisté pendant des siècles.</p>
+</div>
+</div>
+
+<h3>La rigueur arrive : Cauchy et Lagrange</h3>
+
+<p><strong>Joseph-Louis Lagrange (1736–1813)</strong> tente de fonder tout le calcul sur les séries de Taylor, croyant que toute fonction "continue" était développable. Il contribue surtout en introduisant le <em>reste de Lagrange</em> — le terme qui borne l'erreur d'approximation — qui porte aujourd'hui son nom.</p>
+
+<p><strong>Augustin-Louis Cauchy (1789–1857)</strong> est le grand architecte de la rigueur moderne. Il montre que les intuitions de Lagrange sont fausses en général (il existe des fonctions lisses dont le DL ne converge pas vers la fonction), et fonde l'analyse sur des définitions précises de limite et de continuité. La formule de Taylor-Lagrange avec reste intégral, que vous utiliserez, lui doit beaucoup.</p>
+
+<div class="callout example">
+<p><strong>L'exemple de Cauchy :</strong> La fonction \(f(x) = e^{-1/x^2}\) (avec \(f(0)=0\)) est indéfiniment dérivable en 0, et toutes ses dérivées valent 0 en ce point. Son DL est donc le polynôme nul — pourtant \(f(x) \neq 0\) pour \(x \neq 0\). Cela montre que le DL, même infini, ne "reconstitue" pas toujours la fonction. Les DL sont des outils <em>locaux</em>.</p>
+</div>
+
+<h3>Les courbes paramétrées : de la géométrie à la physique</h3>
+
+<p>L'étude des courbes définies par des équations paramétriques est bien plus ancienne que le calcul infinitésimal. Les Grecs connaissaient déjà la cycloïde (Galilée en 1599, puis Roberval, Descartes et Pascal), la spirale d'Archimède, les coniques. Ces courbes fascinaient car elles ne pouvaient pas être décrites par une simple équation \(y = f(x)\).</p>
+
+<div class="two-col">
+<div class="mini-card">
+  <h4>🌀 La cycloïde et ses mystères</h4>
+  <p style="font-size:14.5px">La cycloïde — tracé d'un point d'un disque qui roule — est surnommée la "Hélène des géomètres" pour avoir suscité tant de passions. En 1696, Jean Bernoulli pose le problème du brachistochrone : quelle courbe minimise le temps de descente ? La réponse : une cycloïde. Newton, Leibniz et Bernoulli la trouvent tous.</p>
+</div>
+<div class="mini-card">
+  <h4>⚙️ Bernoulli et l'analyse des courbes</h4>
+  <p style="font-size:14.5px"><strong>Johann Bernoulli (1667–1748)</strong> développe l'étude locale des courbes paramétrées, notamment la notion de point de rebroussement. Avec son frère Jakob et son fils Daniel, la famille Bernoulli domine l'analyse européenne pendant trois générations — fait unique dans l'histoire des sciences.</p>
+</div>
+</div>
+
+<h3>Héritage et applications modernes</h3>
+
+<p>Les idées de Taylor et Cauchy sont aujourd'hui au cœur de domaines très variés :</p>
+
+<div class="three-col">
+  <div class="mini-card">
+    <h4>💻 Informatique numérique</h4>
+    <p style="font-size:13.5px">Les processeurs calculent \(\sin\), \(\exp\), \(\ln\) grâce à leurs DL tronqués — c'est rapide et précis au bit près.</p>
+  </div>
+  <div class="mini-card">
+    <h4>🚀 Mécanique spatiale</h4>
+    <p style="font-size:13.5px">Les trajectoires des sondes spatiales sont calculées comme des courbes paramétrées. Les corrections de cap exploitent les DL des équations du mouvement.</p>
+  </div>
+  <div class="mini-card">
+    <h4>📊 Finance quantitative</h4>
+    <p style="font-size:13.5px">La formule de Black-Scholes pour les options financières est une application directe des développements de Taylor pour approximer des risques.</p>
+  </div>
+</div>
+</section>
+
+<hr class="sep"/>
+
+<!-- ═══════════════════════════════════════════════════════
+     CHAPITRE 1
+═══════════════════════════════════════════════════════ -->
+<section id="ch1">
+<h2 id="trigo"><span class="chapter-num">Chap.  1</span> La Boîte à Outils — Prérequis</h2>
+
+<p class="lead">Avant d'aborder les développements limités, il est indispensable de maîtriser les outils qui apparaissent dans presque tous les calculs : la trigonométrie, les fonctions circulaires réciproques, et les fonctions hyperboliques.</p>
+
+<h3>Trigonométrie — Rappels essentiels</h3>
+
+<p>Le cercle trigonométrique de rayon 1, centré en l'origine, est le lieu géométrique des points \((\cos\theta, \sin\theta)\) pour \(\theta \in \mathbb{R}\).</p>
+
+<!-- DIAGRAM: Cercle trigo vs hyperbole -->
+<div class="diagram-wrap">
+  <div class="diagram-title">🔵 Cercle trigonométrique vs Hyperbole unitaire</div>
+  <svg width="100%" viewBox="0 0 680 300" role="img">
+    <title>Comparaison cercle trigonométrique et hyperbole unitaire</title>
+    <defs>
+      <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </marker>
+    </defs>
+
+    <!-- LEFT: CERCLE TRIGO -->
+    <text x="170" y="22" text-anchor="middle" font-family="Outfit,sans-serif" font-size="12" font-weight="700" fill="#a78bfa" letter-spacing="1">CERCLE TRIGONOMÉTRIQUE</text>
+    <!-- Axes -->
+    <line x1="50" y1="150" x2="295" y2="150" stroke="#3a3a4e" stroke-width="0.8" marker-end="url(#arr)"/>
+    <line x1="170" y1="260" x2="170" y2="30" stroke="#3a3a4e" stroke-width="0.8" marker-end="url(#arr)"/>
+    <text x="296" y="154" font-family="JetBrains Mono,monospace" font-size="12" fill="#5f5e6a">x</text>
+    <text x="174" y="28" font-family="JetBrains Mono,monospace" font-size="12" fill="#5f5e6a">y</text>
+    <!-- Circle -->
+    <circle cx="170" cy="150" r="95" fill="none" stroke="#534ab7" stroke-width="1.2"/>
+    <!-- Angle arc -->
+    <path d="M 195 150 A 25 25 0 0 0 183.7 126" fill="none" stroke="#f0c96a" stroke-width="1.2"/>
+    <text x="202" y="138" font-family="JetBrains Mono,monospace" font-size="11" fill="#f0c96a">θ</text>
+    <!-- Point on circle -->
+    <line x1="170" y1="150" x2="237" y2="84" stroke="#a78bfa" stroke-width="1" stroke-dasharray="4 3"/>
+    <circle cx="237" cy="84" r="4" fill="#a78bfa"/>
+    <!-- cos -->
+    <line x1="237" y1="150" x2="237" y2="84" stroke="#34d9b3" stroke-width="1.5"/>
+    <line x1="170" y1="150" x2="237" y2="150" stroke="#60a5fa" stroke-width="1.5"/>
+    <text x="200" y="167" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" fill="#60a5fa">cosθ</text>
+    <text x="248" y="120" font-family="JetBrains Mono,monospace" font-size="11" fill="#34d9b3">sinθ</text>
+    <!-- Labels +1 -1 -->
+    <text x="266" y="155" font-family="JetBrains Mono,monospace" font-size="10" fill="#5f5e6a">1</text>
+    <text x="69" y="155" font-family="JetBrains Mono,monospace" font-size="10" fill="#5f5e6a">-1</text>
+    <text x="174" y="58" font-family="JetBrains Mono,monospace" font-size="10" fill="#5f5e6a">1</text>
+    <text x="174" y="248" font-family="JetBrains Mono,monospace" font-size="10" fill="#5f5e6a">-1</text>
+    <!-- Equation -->
+    <text x="170" y="285" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="12" fill="#8a8aa0">cos²θ + sin²θ = 1</text>
+
+    <!-- DIVIDER -->
+    <line x1="340" y1="20" x2="340" y2="290" stroke="#2e2e3e" stroke-width="1" stroke-dasharray="5 4"/>
+
+    <!-- RIGHT: HYPERBOLE -->
+    <text x="510" y="22" text-anchor="middle" font-family="Outfit,sans-serif" font-size="12" font-weight="700" fill="#34d9b3" letter-spacing="1">HYPERBOLE UNITAIRE</text>
+    <!-- Axes -->
+    <line x1="390" y1="150" x2="635" y2="150" stroke="#3a3a4e" stroke-width="0.8" marker-end="url(#arr)"/>
+    <line x1="510" y1="260" x2="510" y2="30" stroke="#3a3a4e" stroke-width="0.8" marker-end="url(#arr)"/>
+    <text x="636" y="154" font-family="JetBrains Mono,monospace" font-size="12" fill="#5f5e6a">x</text>
+    <text x="514" y="28" font-family="JetBrains Mono,monospace" font-size="12" fill="#5f5e6a">y</text>
+    <!-- Hyperbola (right branch) -->
+    <path d="M 515 54 Q 580 150 515 246" fill="none" stroke="#0f6e56" stroke-width="1.2" stroke-dasharray="3 2"/>
+    <path d="M 525 70 C 590 100 610 150 590 150 C 610 150 590 200 525 230" fill="none" stroke="#34d9b3" stroke-width="1.5"/>
+    <!-- Left branch -->
+    <path d="M 495 70 C 430 100 410 150 430 150 C 410 150 430 200 495 230" fill="none" stroke="#34d9b3" stroke-width="1"/>
+    <!-- Shade area -->
+    <path d="M 510 150 L 560 108 A 70 70 0 0 1 560 192 Z" fill="rgba(52,217,179,0.07)"/>
+    <!-- t label (area) -->
+    <text x="540" y="148" font-family="JetBrains Mono,monospace" font-size="11" fill="#6ee7cf">t/2</text>
+    <!-- Point P on hyperbola -->
+    <circle cx="565" cy="113" r="4" fill="#34d9b3"/>
+    <line x1="565" y1="150" x2="565" y2="113" stroke="#f0c96a" stroke-width="1.5"/>
+    <line x1="510" y1="150" x2="565" y2="150" stroke="#fb923c" stroke-width="1.5"/>
+    <text x="537" y="167" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" fill="#fb923c">ch(t)</text>
+    <text x="578" y="133" font-family="JetBrains Mono,monospace" font-size="11" fill="#f0c96a">sh(t)</text>
+    <!-- Equation -->
+    <text x="510" y="285" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="12" fill="#8a8aa0">ch²(t) - sh²(t) = 1</text>
+  </svg>
+  <p style="font-size:12.5px;color:#5a5a70;margin-top:0.75rem">À gauche : le cercle trigonométrique paramétré par l'angle \(\theta\). À droite : l'hyperbole unitaire \(x^2-y^2=1\) paramétrée par l'aire hyperbolique \(t\). Notez la similitude structurelle : même équation, signe différent.</p>
+</div>
+
+<h4>Formules fondamentales</h4>
+
+<div class="two-col">
+<div class="mini-card">
+  <h4>Formules d'addition</h4>
+  <div class="math-block centered">
+    \[\cos(a+b) = \cos a\cos b - \sin a\sin b\]
+    \[\sin(a+b) = \sin a\cos b + \cos a\sin b\]
+    \[\tan(a+b) = \dfrac{\tan a + \tan b}{1-\tan a\tan b}\]
+  </div>
+</div>
+<div class="mini-card">
+  <h4>Formules de linéarisation</h4>
+  <div class="math-block centered">
+    \[\cos^2 a = \frac{1+\cos(2a)}{2}\]
+    \[\sin^2 a = \frac{1-\cos(2a)}{2}\]
+    \[\sin a\cos a = \frac{\sin(2a)}{2}\]
+  </div>
+</div>
+</div>
+
+<div class="callout remark">
+<p><strong>Mnémotechnique :</strong> Pour \(\cos(a+b)\), on commence par <em>coscos</em> et on <em>soustrait sinsin</em>. Pour \(\sin(a+b)\), c'est <em>sin-cos + cos-sin</em>. L'ordre est toujours "premier terme × second terme".</p>
+</div>
+
+<!-- FONCTIONS RÉCIPROQUES -->
+<h3 id="circ">Fonctions circulaires réciproques</h3>
+
+<p>Les fonctions \(\sin\), \(\cos\), \(\tan\) ne sont pas injectives sur \(\mathbb{R}\). Pour définir leurs inverses, il faut <em>restreindre</em> leur domaine à un intervalle où elles sont bijectives.</p>
+
+<div class="dl-table-wrap">
+<table>
+  <thead><tr><th>Fonction</th><th>Domaine de définition</th><th>Image</th><th>Dérivée</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>\(\arcsin(x)\)</td>
+      <td>\([-1,\,1]\)</td>
+      <td>\(\left[-\dfrac{\pi}{2},\dfrac{\pi}{2}\right]\)</td>
+      <td>\(\dfrac{1}{\sqrt{1-x^2}}\)</td>
+    </tr>
+    <tr>
+      <td>\(\arccos(x)\)</td>
+      <td>\([-1,\,1]\)</td>
+      <td>\([0,\,\pi]\)</td>
+      <td>\(\dfrac{-1}{\sqrt{1-x^2}}\)</td>
+    </tr>
+    <tr>
+      <td>\(\arctan(x)\)</td>
+      <td>\(\mathbb{R}\)</td>
+      <td>\(\left(-\dfrac{\pi}{2},\dfrac{\pi}{2}\right)\)</td>
+      <td>\(\dfrac{1}{1+x^2}\)</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="callout warning">
+<p><strong>Piège classique :</strong> \(\arcsin(\sin x) = x\) est vrai <strong>seulement si</strong> \(x \in [-\pi/2, \pi/2]\). En dehors, la formule est fausse ! Par exemple, \(\arcsin(\sin(\pi)) = \arcsin(0) = 0 \neq \pi\).</p>
+</div>
+
+<div class="callout example">
+<p><strong>Démontrons</strong> que \((\arctan x)' = \dfrac{1}{1+x^2}\).</p>
+<p>Soit \(y = \arctan x\), c'est-à-dire \(\tan y = x\) avec \(y \in (-\pi/2, \pi/2)\). En dérivant implicitement par rapport à \(x\) :</p>
+<div class="math-block">
+  \[\frac{d}{dx}(\tan y) = 1 \implies \frac{1}{\cos^2 y}\cdot y' = 1\]
+</div>
+<p>Or \(\cos^2 y = \dfrac{1}{1+\tan^2 y} = \dfrac{1}{1+x^2}\). Donc \(y' = \cos^2 y = \dfrac{1}{1+x^2}\). \(\square\)</p>
+</div>
+
+<!-- FONCTIONS HYPERBOLIQUES -->
+<h3 id="hyp">Fonctions hyperboliques et leurs réciproques</h3>
+
+<p>Les fonctions hyperboliques sont définies à partir de l'exponentielle et jouent un rôle analogue aux fonctions trigonométriques, mais pour l'hyperbole au lieu du cercle.</p>
+
+<div class="callout definition">
+<p>Pour tout \(x \in \mathbb{R}\) :</p>
+<div class="math-block centered">
+\[\operatorname{sh}(x) = \frac{e^x - e^{-x}}{2}, \quad \operatorname{ch}(x) = \frac{e^x + e^{-x}}{2}, \quad \operatorname{th}(x) = \frac{\operatorname{sh}(x)}{\operatorname{ch}(x)} = \frac{e^x - e^{-x}}{e^x + e^{-x}}\]
+</div>
+</div>
+
+<div class="two-col">
+<div class="mini-card">
+  <h4>Identités fondamentales</h4>
+  <div class="math-block">
+    \[\operatorname{ch}^2(x) - \operatorname{sh}^2(x) = 1\]
+    \[\operatorname{sh}(x+y) = \operatorname{sh}x\operatorname{ch}y + \operatorname{ch}x\operatorname{sh}y\]
+    \[\operatorname{ch}(x+y) = \operatorname{ch}x\operatorname{ch}y + \operatorname{sh}x\operatorname{sh}y\]
+  </div>
+</div>
+<div class="mini-card">
+  <h4>Dérivées</h4>
+  <div class="math-block">
+    \[(\operatorname{sh}\,x)' = \operatorname{ch}(x)\]
+    \[(\operatorname{ch}\,x)' = \operatorname{sh}(x)\]
+    \[(\operatorname{th}\,x)' = 1 - \operatorname{th}^2(x) = \dfrac{1}{\operatorname{ch}^2(x)}\]
+  </div>
+</div>
+</div>
+
+<div class="dl-table-wrap">
+<table>
+  <thead><tr><th>Fonction réciproque</th><th>Notation</th><th>Formule explicite</th><th>Dérivée</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>Argument sinus hyperbolique</td>
+      <td>\(\operatorname{Argsh}(x)\)</td>
+      <td>\(\ln\!\left(x + \sqrt{x^2+1}\right)\)</td>
+      <td>\(\dfrac{1}{\sqrt{x^2+1}}\)</td>
+    </tr>
+    <tr>
+      <td>Argument cosinus hyperbolique</td>
+      <td>\(\operatorname{Argch}(x)\)</td>
+      <td>\(\ln\!\left(x + \sqrt{x^2-1}\right),\; x\geq 1\)</td>
+      <td>\(\dfrac{1}{\sqrt{x^2-1}}\)</td>
+    </tr>
+    <tr>
+      <td>Argument tangente hyperbolique</td>
+      <td>\(\operatorname{Argth}(x)\)</td>
+      <td>\(\dfrac{1}{2}\ln\!\dfrac{1+x}{1-x},\; |x|<1\)</td>
+      <td>\(\dfrac{1}{1-x^2}\)</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="callout remark">
+<p><strong>Similitudes et différences avec la trigonométrie :</strong> Remplacez "sin" par "sh", "cos" par "ch" dans les identités trigo, et changez les signes aux bons endroits. La règle mnémotechnique : chaque fois que deux "sh" apparaissent multipliés ensemble, un signe \(+\) devient \(-\) par rapport à l'analogue trigonométrique (c'est la différence \(\operatorname{ch}^2 - \operatorname{sh}^2 = 1\) au lieu de \(\cos^2+\sin^2=1\)).</p>
+</div>
+
+<!-- THÉORÈME DE ROLLE -->
+<h3 id="rolle">Théorème de Rolle</h3>
+
+<p>Le théorème de Rolle est un résultat fondamental d'analyse, qui affirme qu'une fonction "qui repart d'où elle est partie" doit s'annuler quelque part entre les deux. C'est l'un des piliers de l'analyse réelle et la clé de la démonstration du TAF.</p>
+
+<div class="callout theorem">
+<p><strong>Théorème de Rolle.</strong> Soit \(f : [a,b] \to \mathbb{R}\) une fonction vérifiant :</p>
+<ul style="margin: 0.5rem 0 0.5rem 1.5rem; line-height: 2;">
+  <li>\(f\) est <strong>continue</strong> sur \([a,b]\),</li>
+  <li>\(f\) est <strong>dérivable</strong> sur \(]a,b[\),</li>
+  <li>\(f(a) = f(b)\).</li>
+</ul>
+<p>Alors il existe <strong>au moins un</strong> \(c \in {]a,b[}\) tel que \(f'(c) = 0\).</p>
+</div>
+
+<!-- DIAGRAM: Illustration de Rolle -->
+<div class="diagram-wrap">
+  <div class="diagram-title">📐 Illustration du Théorème de Rolle</div>
+  <svg width="100%" viewBox="0 0 620 240" role="img">
+    <title>Illustration du théorème de Rolle</title>
+    <defs>
+      <marker id="arr2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </marker>
+    </defs>
+    <!-- Axes -->
+    <line x1="60" y1="195" x2="580" y2="195" stroke="#3a3a4e" stroke-width="1" marker-end="url(#arr2)"/>
+    <line x1="60" y1="210" x2="60" y2="20" stroke="#3a3a4e" stroke-width="1" marker-end="url(#arr2)"/>
+    <text x="585" y="199" font-family="JetBrains Mono,monospace" font-size="13" fill="#5f5e6a">x</text>
+    <text x="64" y="18" font-family="JetBrains Mono,monospace" font-size="13" fill="#5f5e6a">y</text>
+
+    <!-- Courbe f (parabole inversée entre a et b) -->
+    <path d="M 130 155 C 200 30, 430 30, 500 155" fill="none" stroke="#a78bfa" stroke-width="2.5"/>
+
+    <!-- Points a et b sur l'axe -->
+    <line x1="130" y1="195" x2="130" y2="155" stroke="#3a3a4e" stroke-width="1" stroke-dasharray="4 3"/>
+    <line x1="500" y1="195" x2="500" y2="155" stroke="#3a3a4e" stroke-width="1" stroke-dasharray="4 3"/>
+    <circle cx="130" cy="155" r="4" fill="#a78bfa"/>
+    <circle cx="500" cy="155" r="4" fill="#a78bfa"/>
+    <text x="126" y="212" font-family="JetBrains Mono,monospace" font-size="13" fill="#8a8aa0" text-anchor="middle">a</text>
+    <text x="500" y="212" font-family="JetBrains Mono,monospace" font-size="13" fill="#8a8aa0" text-anchor="middle">b</text>
+
+    <!-- f(a) = f(b) horizontal dashed -->
+    <line x1="90" y1="155" x2="550" y2="155" stroke="#f0c96a" stroke-width="1" stroke-dasharray="5 4"/>
+    <text x="64" y="159" font-family="JetBrains Mono,monospace" font-size="11" fill="#f0c96a" text-anchor="end">f(a)=f(b)</text>
+
+    <!-- Point c au sommet -->
+    <line x1="315" y1="195" x2="315" y2="35" stroke="#3a3a4e" stroke-width="1" stroke-dasharray="4 3"/>
+    <circle cx="315" cy="35" r="5" fill="#34d9b3"/>
+    <text x="315" y="212" font-family="JetBrains Mono,monospace" font-size="13" fill="#34d9b3" text-anchor="middle">c</text>
+
+    <!-- Tangente horizontale en c -->
+    <line x1="230" y1="35" x2="400" y2="35" stroke="#34d9b3" stroke-width="2"/>
+    <text x="410" y="39" font-family="JetBrains Mono,monospace" font-size="12" fill="#34d9b3">f'(c)=0</text>
+    <text x="315" y="22" font-family="JetBrains Mono,monospace" font-size="11" fill="#6ee7cf" text-anchor="middle">tangente horizontale</text>
+  </svg>
+  <p style="font-size:12.5px;color:#5a5a70;margin-top:0.75rem">Entre \(a\) et \(b\), la fonction atteint un extremum en \(c\) : la tangente y est horizontale, donc \(f'(c)=0\).</p>
+</div>
+
+<div class="callout proof">
+<p><strong>Démonstration.</strong> Puisque \(f\) est continue sur le compact \([a,b]\), elle est bornée et atteint ses bornes (théorème des valeurs extrêmes). Soient \(m = \min_{[a,b]} f\) et \(M = \max_{[a,b]} f\).</p>
+<p><strong>Cas 1 :</strong> Si \(m = M\), alors \(f\) est constante, donc \(f'(x) = 0\) pour tout \(x \in {]a,b[}\).</p>
+<p><strong>Cas 2 :</strong> Sinon, \(m < M\). Comme \(f(a)=f(b)\), au moins l'un des deux extrêmes est atteint en un point \(c \in {]a,b[}\). En ce point, \(f\) est dérivable et admet un extremum local, donc \(f'(c) = 0\). \(\square\)</p>
+</div>
+
+<div class="callout example">
+<p><strong>Application :</strong> Montrons que \(f(x) = x^3 - 3x\) admet un point critique dans \(]-1, 1[\).</p>
+<p>On calcule : \(f(-1) = -1+3 = 2\) et \(f(1) = 1-3 = -2\). Oops, \(f(-1)\neq f(1)\).</p>
+<p>Essayons sur \([0, \sqrt{3}]\) : \(f(0) = 0\) et \(f(\sqrt{3}) = 3\sqrt{3} - 3\sqrt{3} = 0\). On a bien \(f(0)=f(\sqrt{3})\), donc par Rolle il existe \(c \in {]0,\sqrt{3}[}\) avec \(f'(c)=0\). En effet, \(f'(x)=3x^2-3=0 \Rightarrow x=1\in {]0,\sqrt{3}[}\). ✓</p>
+</div>
+
+<!-- THÉORÈME DES ACCROISSEMENTS FINIS -->
+<h3 id="taf">Théorème des Accroissements Finis (TAF)</h3>
+
+<p>Le TAF est une généralisation du théorème de Rolle : même sans la condition \(f(a)=f(b)\), la dérivée doit au moins une fois égaler le <em>taux d'accroissement moyen</em> de \(f\) entre \(a\) et \(b\).</p>
+
+<div class="callout theorem">
+<p><strong>Théorème des Accroissements Finis.</strong> Soit \(f : [a,b] \to \mathbb{R}\) une fonction :</p>
+<ul style="margin: 0.5rem 0 0.5rem 1.5rem; line-height: 2;">
+  <li><strong>continue</strong> sur \([a,b]\),</li>
+  <li><strong>dérivable</strong> sur \(]a,b[\).</li>
+</ul>
+<p>Alors il existe <strong>au moins un</strong> \(c \in {]a,b[}\) tel que :</p>
+<div class="math-block centered">
+  \[f'(c) = \frac{f(b) - f(a)}{b - a}\]
+</div>
+<p>Autrement dit, il existe un point où la tangente est parallèle à la corde \((A,B)\) avec \(A=(a,f(a))\) et \(B=(b,f(b))\).</p>
+</div>
+
+<!-- DIAGRAM: Illustration du TAF -->
+<div class="diagram-wrap">
+  <div class="diagram-title">📐 Illustration du Théorème des Accroissements Finis</div>
+  <svg width="100%" viewBox="0 0 620 250" role="img">
+    <title>Illustration du théorème des accroissements finis</title>
+    <defs>
+      <marker id="arr3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </marker>
+    </defs>
+    <!-- Axes -->
+    <line x1="60" y1="210" x2="580" y2="210" stroke="#3a3a4e" stroke-width="1" marker-end="url(#arr3)"/>
+    <line x1="60" y1="225" x2="60" y2="20" stroke="#3a3a4e" stroke-width="1" marker-end="url(#arr3)"/>
+    <text x="585" y="214" font-family="JetBrains Mono,monospace" font-size="13" fill="#5f5e6a">x</text>
+    <text x="64" y="18" font-family="JetBrains Mono,monospace" font-size="13" fill="#5f5e6a">y</text>
+
+    <!-- Courbe f (cubique) -->
+    <path d="M 120 170 C 200 60, 350 200, 520 80" fill="none" stroke="#a78bfa" stroke-width="2.5"/>
+
+    <!-- Points A et B -->
+    <circle cx="120" cy="170" r="5" fill="#f0c96a"/>
+    <circle cx="520" cy="80" r="5" fill="#f0c96a"/>
+    <line x1="120" y1="210" x2="120" y2="170" stroke="#3a3a4e" stroke-width="1" stroke-dasharray="4 3"/>
+    <line x1="520" y1="210" x2="520" y2="80" stroke="#3a3a4e" stroke-width="1" stroke-dasharray="4 3"/>
+    <text x="116" y="226" font-family="JetBrains Mono,monospace" font-size="13" fill="#8a8aa0" text-anchor="middle">a</text>
+    <text x="520" y="226" font-family="JetBrains Mono,monospace" font-size="13" fill="#8a8aa0" text-anchor="middle">b</text>
+    <text x="100" y="168" font-family="JetBrains Mono,monospace" font-size="11" fill="#f0c96a" text-anchor="end">A</text>
+    <text x="534" y="80" font-family="JetBrains Mono,monospace" font-size="11" fill="#f0c96a">B</text>
+
+    <!-- Corde AB -->
+    <line x1="120" y1="170" x2="520" y2="80" stroke="#f0c96a" stroke-width="1.5" stroke-dasharray="6 4"/>
+
+    <!-- Point c -->
+    <line x1="310" y1="210" x2="310" y2="107" stroke="#3a3a4e" stroke-width="1" stroke-dasharray="4 3"/>
+    <circle cx="310" cy="107" r="5" fill="#34d9b3"/>
+    <text x="310" y="226" font-family="JetBrains Mono,monospace" font-size="13" fill="#34d9b3" text-anchor="middle">c</text>
+
+    <!-- Tangente parallèle à la corde en c -->
+    <line x1="200" y1="133" x2="420" y2="80" stroke="#34d9b3" stroke-width="2"/>
+    <text x="435" y="79" font-family="JetBrains Mono,monospace" font-size="11" fill="#34d9b3">tangente ∥ corde</text>
+    <text x="310" y="95" font-family="JetBrains Mono,monospace" font-size="11" fill="#6ee7cf" text-anchor="middle">f'(c) = (f(b)-f(a))/(b-a)</text>
+  </svg>
+  <p style="font-size:12.5px;color:#5a5a70;margin-top:0.75rem">En \(c\), la tangente à la courbe est <strong>parallèle</strong> à la corde \(AB\). Le TAF garantit l'existence d'un tel point.</p>
+</div>
+
+<div class="callout proof">
+<p><strong>Démonstration (via Rolle).</strong> Posons la fonction auxiliaire :</p>
+<div class="math-block centered">
+  \[g(x) = f(x) - \left[f(a) + \frac{f(b)-f(a)}{b-a}(x-a)\right]\]
+</div>
+<p>\(g\) est continue sur \([a,b]\), dérivable sur \(]a,b[\), et \(g(a) = 0\), \(g(b) = 0\).</p>
+<p>Par le <strong>théorème de Rolle</strong>, il existe \(c \in {]a,b[}\) tel que \(g'(c) = 0\), c'est-à-dire :</p>
+<div class="math-block centered">
+  \[f'(c) - \frac{f(b)-f(a)}{b-a} = 0 \implies f'(c) = \frac{f(b)-f(a)}{b-a}. \quad \square\]
+</div>
+</div>
+
+<div class="callout remark">
+<p><strong>Corollaires importants du TAF :</strong></p>
+<ul style="margin: 0.5rem 0 0 1.5rem; line-height: 2;">
+  <li>Si \(f'(x) = 0\) pour tout \(x \in {]a,b[}\), alors \(f\) est <strong>constante</strong> sur \([a,b]\).</li>
+  <li>Si \(f'(x) > 0\) sur \(]a,b[\), alors \(f\) est <strong>strictement croissante</strong> sur \([a,b]\).</li>
+  <li>Si \(f'(x) \leq M\) pour tout \(x \in {]a,b[}\), alors \(|f(b)-f(a)| \leq M(b-a)\) (<strong>inégalité des accroissements finis</strong>).</li>
+</ul>
+</div>
+
+<div class="callout example">
+<p><strong>Exemple d'application (inégalité) :</strong> Montrons que \(|\sin x - \sin y| \leq |x-y|\) pour tous \(x,y \in \mathbb{R}\).</p>
+<p>Soit \(f(t)=\sin t\). On a \(f'(t)=\cos t\), donc \(|f'(t)| \leq 1\) pour tout \(t\). Par l'inégalité des accroissements finis :</p>
+<div class="math-block centered">
+  \[|\sin x - \sin y| = |f(x)-f(y)| \leq 1 \cdot |x-y| = |x-y|. \quad \square\]
+</div>
+</div>
+
+<div class="callout warning">
+<p><strong>Attention :</strong> Le TAF donne l'<em>existence</em> de \(c\), mais ne dit rien sur son unicité ni sur sa valeur explicite. De plus, il est <strong>faux pour les fonctions vectorielles</strong> : par exemple \(f(t)=(\cos t, \sin t)\) sur \([0, 2\pi]\) vérifie \(f(0)=f(2\pi)\) mais \(f'(t) = (-\sin t, \cos t)\) ne s'annule jamais.</p>
+</div>
+
+<!-- 0.4.1 ─ Formes indéterminées -->
+<h3 id="fi">0.4.1 Les sept formes indéterminées</h3>
+
+<p>Une <strong>forme indéterminée (FI)</strong> est un calcul de limite dont le résultat ne peut être conclu directement à partir des limites des composantes :</p>
+
+<div class="math-block centered">
+  \[\frac{0}{0},\quad \frac{\infty}{\infty},\quad 0\times\infty,\quad \infty-\infty,\quad 1^\infty,\quad 0^0,\quad \infty^0\]
+</div>
+
+<div class="callout method">
+<p><strong>Stratégies de levée :</strong></p>
+<p>1. <strong>Factorisation</strong> par le terme dominant.</p>
+<p>2. <strong>Quantité conjuguée</strong> (pour \(\sqrt{\cdot}-\sqrt{\cdot}\)).</p>
+<p>3. <strong>Règle de L'Hôpital</strong> (à utiliser avec précaution).</p>
+<p>4. <strong>Développement limité</strong> (la méthode reine — chapitre 1).</p>
+</div>
+
+<!-- 0.4.2 ─ Limites usuelles -->
+<h3 id="limites-usuelles">0.4.2 Limites usuelles à connaître par cœur</h3>
+
+<div class="math-block centered">
+  \[\lim_{x\to 0}\frac{\sin x}{x}=1,\qquad \lim_{x\to 0}\frac{1-\cos x}{x^2}=\frac{1}{2},\qquad \lim_{x\to 0}\frac{\tan x}{x}=1\]
+</div>
+<div class="math-block centered">
+  \[\lim_{x\to 0}\frac{e^x-1}{x}=1,\qquad \lim_{x\to 0}\frac{\ln(1+x)}{x}=1,\qquad \lim_{x\to 0}\frac{(1+x)^\alpha-1}{x}=\alpha\]
+</div>
+
+<!-- 0.4.3 ─ Croissances comparées -->
+<h3 id="croissances">0.4.3 Croissances comparées</h3>
+
+<p>À l'infini, l'<strong>exponentielle l'emporte sur la puissance</strong>, qui l'emporte sur le <strong>logarithme</strong> :</p>
+
+<div class="math-block centered">
+  \[\forall\,\alpha,\beta>0,\qquad \lim_{x\to+\infty}\frac{(\ln x)^\alpha}{x^\beta}=0 \quad\text{et}\quad \lim_{x\to+\infty}\frac{x^\alpha}{e^{\beta x}}=0\]
+</div>
+
+<!-- 0.4.4 ─ Leibniz -->
+<h3 id="leibniz">0.4.4 Dérivées successives — Formule de Leibniz</h3>
+
+<p>Si <strong>\(u\)</strong> et <strong>\(v\)</strong> sont \(n\) fois dérivables, alors <strong>\(uv\)</strong> l'est aussi et :</p>
+
+<div class="callout theorem">
+<div class="math-block centered">
+  \[(uv)^{(n)}=\sum_{k=0}^{n}\binom{n}{k}u^{(k)}v^{(n-k)}\]
+</div>
+</div>
+
+<div class="callout example">
+<p><strong>Exemple.</strong> Calculons \((x^2 e^x)^{(n)}\) avec \(u=e^x\) (toutes les dérivées valent \(e^x\)) et \(v=x^2\) (seules \(v^{(0)}=x^2\), \(v^{(1)}=2x\), \(v^{(2)}=2\) sont non nulles) :</p>
+<div class="math-block centered">
+  \[(x^2 e^x)^{(n)}=e^x\left[\binom{n}{0}x^2+\binom{n}{1}\cdot 2x+\binom{n}{2}\cdot 2\right]=e^x\left[x^2+2nx+n(n-1)\right]\]
+</div>
+</div>
+
+</section>
+
+<hr class="sep"/>
+
+<!-- ═══════════════════════════════════════════════════════
+     CHAPITRE 2
+═══════════════════════════════════════════════════════ -->
+<section id="ch2">
+<h2 id="formules-taylor"><span class="chapter-num">Chap. 2</span> Formules de Taylor et Développements Limités</h2>
+
+<p class="lead">Ce chapitre est le cœur du cours. Il repose sur une idée simple mais profonde : approximer une fonction complexe par un polynôme — l'objet le plus simple et le plus maniable des mathématiques.</p>
+
+<h3>Les trois visages de Taylor</h3>
+
+<p>Il existe plusieurs versions de la formule de Taylor. Elles diffèrent par la <strong>nature du reste</strong> : la formule de Lagrange donne un reste explicite (mais global), tandis que la formule de Young donne un reste seulement qualitatif (mais local et très utile).</p>
+
+<div class="callout theorem">
+<p><strong>Formule de Taylor-Lagrange</strong> (reste global)</p>
+<p>Soit \(f : [a,b] \to \mathbb{R}\) de classe \(\mathcal{C}^n\) sur \([a,b]\) et \((n+1)\) fois dérivable sur \(]a,b[\). Alors il existe \(c \in \,]a,b[\) tel que :</p>
+<div class="math-block centered">
+\[f(b) = \sum_{k=0}^{n} \frac{f^{(k)}(a)}{k!}(b-a)^k + \underbrace{\frac{f^{(n+1)}(c)}{(n+1)!}(b-a)^{n+1}}_{\text{Reste de Lagrange}}\]
+</div>
+</div>
+
+<div class="callout theorem">
+<p><strong>Formule de Taylor-Young</strong> (reste local, ou "petit o")</p>
+<p>Soit \(f\) de classe \(\mathcal{C}^n\) au voisinage de \(a\). Alors, quand \(x \to a\) :</p>
+<div class="math-block centered">
+\[f(x) = \sum_{k=0}^{n} \frac{f^{(k)}(a)}{k!}(x-a)^k + o\!\left((x-a)^n\right)\]
+</div>
+<p>où \(o\!\left((x-a)^n\right)\) désigne un terme <em>négligeable devant</em> \((x-a)^n\) quand \(x \to a\).</p>
+</div>
+
+<div class="callout theorem">
+<p><strong>Formule de Maclaurin</strong> (Taylor en \(a=0\))</p>
+<p>C'est simplement la formule de Taylor-Young appliquée au point \(a=0\) :</p>
+<div class="math-block centered">
+\[f(x) = f(0) + f'(0)\,x + \frac{f''(0)}{2!}\,x^2 + \cdots + \frac{f^{(n)}(0)}{n!}\,x^n + o(x^n)\]
+</div>
+</div>
+
+<div class="callout warning">
+<p><strong>Différence fondamentale :</strong> La formule de <strong>Lagrange</strong> est une <em>égalité exacte</em>, valable globalement sur \([a,b]\) — elle dit qu'il <em>existe</em> un point \(c\) (qu'on ne connaît pas précisément). Elle sert à <strong>majorer des erreurs d'approximation</strong>. La formule de <strong>Young</strong> est une <em>approximation locale</em> au voisinage de \(a\) — elle est opérationnelle pour les calculs de limites et l'étude de courbes.</p>
+</div>
+
+<h3>Démonstration simple (n=1)</h3>
+
+<div class="callout proof">
+<p>Montrons la formule de Taylor à l'ordre 1 avec reste de Lagrange.</p>
+<p>Soit \(f\) de classe \(\mathcal{C}^1\) sur \([a,b]\) et deux fois dérivable sur \(]a,b[\). D'après le théorème des accroissements finis généralisé (ou la formule intégrale), on a :</p>
+<div class="math-block">
+\[f(b) = f(a) + \int_a^b f'(t)\,dt\]
+</div>
+<p>On intègre par parties avec \(u = f'(t)\) et \(v' = 1\), ce qui donne \(u' = f''(t)\) et \(v = t - b\) (choix de la constante d'intégration). Alors :</p>
+<div class="math-block">
+\[\int_a^b f'(t)\,dt = \Big[(t-b)f'(t)\Big]_a^b - \int_a^b (t-b)f''(t)\,dt = f'(a)(b-a) + \int_a^b (b-t)f''(t)\,dt\]
+</div>
+<p>Par le théorème de la valeur intermédiaire pour les intégrales, il existe \(c \in ]a,b[\) tel que :</p>
+<div class="math-block">
+\[\int_a^b (b-t)f''(t)\,dt = f''(c)\int_a^b (b-t)\,dt = f''(c)\cdot\frac{(b-a)^2}{2}\]
+</div>
+<p>Donc : \(f(b) = f(a) + f'(a)(b-a) + \dfrac{f''(c)}{2}(b-a)^2\). \(\square\)</p>
+</div>
+
+<!-- ── DL DÉFINITION ── -->
+<h3 id="dl-def">Développements limités en 0 — Définition et notation</h3>
+
+<div class="callout definition">
+<p>On dit que \(f\) admet un <strong>développement limité d'ordre \(n\) en 0</strong> s'il existe des réels \(a_0, a_1, \ldots, a_n\) et une fonction \(\varepsilon\) telle que \(\varepsilon(x) \xrightarrow[x\to 0]{} 0\), avec :</p>
+<div class="math-block centered">
+\[f(x) = a_0 + a_1 x + a_2 x^2 + \cdots + a_n x^n + x^n\varepsilon(x)\]
+</div>
+<p>On note ce reste \(o(x^n)\) (lire : "<em>petit o de \(x^n\)</em>").</p>
+</div>
+
+<div class="callout remark">
+<p><strong>Rappel sur la notation "petit o" :</strong> "\(u(x) = o(v(x))\) quand \(x \to a\)" signifie \(\dfrac{u(x)}{v(x)} \xrightarrow[x \to a]{} 0\). En particulier, \(o(x^n)\) est n'importe quelle fonction qui "disparaît plus vite que \(x^n\)" au voisinage de 0.</p>
+</div>
+
+<h3>Tableau des DL usuels en 0</h3>
+
+<div class="dl-table-wrap">
+<table>
+  <thead>
+    <tr><th>Fonction \(f(x)\)</th><th>DL à l'ordre \(n\) en 0</th><th>Condition</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>\(e^x\)</td>
+      <td>\(1 + x + \dfrac{x^2}{2!} + \dfrac{x^3}{3!} + \cdots + \dfrac{x^n}{n!} + o(x^n)\)</td>
+      <td>\(n \geq 0\)</td>
+    </tr>
+    <tr>
+      <td>\(\ln(1+x)\)</td>
+      <td>\(x - \dfrac{x^2}{2} + \dfrac{x^3}{3} - \cdots + (-1)^{n-1}\dfrac{x^n}{n} + o(x^n)\)</td>
+      <td>\(n \geq 1\)</td>
+    </tr>
+    <tr>
+      <td>\(\sin(x)\)</td>
+      <td>\(x - \dfrac{x^3}{3!} + \dfrac{x^5}{5!} - \cdots + (-1)^p\dfrac{x^{2p+1}}{(2p+1)!} + o(x^{2p+2})\)</td>
+      <td>\(n = 2p+1\)</td>
+    </tr>
+    <tr>
+      <td>\(\cos(x)\)</td>
+      <td>\(1 - \dfrac{x^2}{2!} + \dfrac{x^4}{4!} - \cdots + (-1)^p\dfrac{x^{2p}}{(2p)!} + o(x^{2p+1})\)</td>
+      <td>\(n = 2p\)</td>
+    </tr>
+    <tr>
+      <td>\(\tan(x)\)</td>
+      <td>\(x + \dfrac{x^3}{3} + \dfrac{2x^5}{15} + \dfrac{17x^7}{315} + o(x^7)\)</td>
+      <td>\(|x| < \pi/2\)</td>
+    </tr>
+    <tr>
+      <td>\(\arctan(x)\)</td>
+      <td>\(x - \dfrac{x^3}{3} + \dfrac{x^5}{5} - \cdots + (-1)^p\dfrac{x^{2p+1}}{2p+1} + o(x^{2p+2})\)</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>\(\arcsin(x)\)</td>
+      <td>\(x + \dfrac{x^3}{6} + \dfrac{3x^5}{40} + o(x^6)\)</td>
+      <td>\(|x| \leq 1\)</td>
+    </tr>
+    <tr>
+      <td>\(\dfrac{1}{1+x}\)</td>
+      <td>\(1 - x + x^2 - x^3 + \cdots + (-1)^n x^n + o(x^n)\)</td>
+      <td>\(|x| < 1\)</td>
+    </tr>
+    <tr>
+      <td>\(\dfrac{1}{1-x}\)</td>
+      <td>\(1 + x + x^2 + x^3 + \cdots + x^n + o(x^n)\)</td>
+      <td>\(|x| < 1\)</td>
+    </tr>
+    <tr>
+      <td>\(\sqrt{1+x}\)</td>
+      <td>\(1 + \dfrac{x}{2} - \dfrac{x^2}{8} + \dfrac{x^3}{16} + o(x^3)\)</td>
+      <td>\(|x| \leq 1\)</td>
+    </tr>
+    <tr>
+      <td>\((1+x)^\alpha\)</td>
+      <td>\(1 + \alpha x + \dfrac{\alpha(\alpha-1)}{2!}x^2 + \cdots + \dbinom{\alpha}{n}x^n + o(x^n)\)</td>
+      <td>\(\alpha \in \mathbb{R}\)</td>
+    </tr>
+    <tr>
+      <td>\(\operatorname{sh}(x)\)</td>
+      <td>\(x + \dfrac{x^3}{3!} + \dfrac{x^5}{5!} + \cdots + \dfrac{x^{2p+1}}{(2p+1)!} + o(x^{2p+2})\)</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>\(\operatorname{ch}(x)\)</td>
+      <td>\(1 + \dfrac{x^2}{2!} + \dfrac{x^4}{4!} + \cdots + \dfrac{x^{2p}}{(2p)!} + o(x^{2p+1})\)</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="callout remark">
+<p><strong>Moyen mémo :</strong> Les DL de \(\sin\) et \(\operatorname{sh}\) sont presque identiques — seuls les signes alternent pour \(\sin\), pas pour \(\operatorname{sh}\). De même, \(\cos\) et \(\operatorname{ch}\) sont analogues. C'est le reflet de la relation \(e^{ix} = \cos x + i\sin x\).</p>
+</div>
+
+<!-- INTERACTIVE TAYLOR WIDGET -->
+<h3>Visualisation interactive des polynômes de Taylor de sin(x)</h3>
+<div class="diagram-wrap">
+  <div class="diagram-title">🎛️ Approximations successives de sin(x) par ses polynômes de Taylor en 0</div>
+  <canvas id="taylor-canvas"></canvas>
+  <div class="controls">
+    <label for="order-slider">Ordre <output id="order-out">1</output></label>
+    <input type="range" id="order-slider" min="1" max="11" step="2" value="1"/>
+    <label for="func-select">Fonction</label>
+    <select id="func-select">
+      <option value="sin">sin(x)</option>
+      <option value="cos">cos(x)</option>
+      <option value="exp">exp(x)</option>
+      <option value="ln">ln(1+x)</option>
+    </select>
+  </div>
+  <div class="legend" id="legend"></div>
+</div>
+
+<!-- DL EN UN POINT a / À L'INFINI -->
+<h3>Extensions : DL en un point <em>a</em> et DL à l'infini</h3>
+
+<div class="callout definition">
+<p><strong>DL en un point \(a\) :</strong> On se ramène au DL en 0 par le changement de variable \(t = x - a\).</p>
+<div class="math-block centered">
+\[f(x) = \sum_{k=0}^{n} \frac{f^{(k)}(a)}{k!}(x-a)^k + o\!\left((x-a)^n\right)\]
+</div>
+</div>
+
+<div class="callout definition">
+<p><strong>DL à l'infini :</strong> On pose \(t = 1/x \to 0\) et on développe \(g(t) = f(1/t)\) en 0.</p>
+<div class="math-block centered">
+\[f(x) = a_0 + \frac{a_1}{x} + \frac{a_2}{x^2} + \cdots + \frac{a_n}{x^n} + o\!\left(\frac{1}{x^n}\right) \quad (x \to +\infty)\]
+</div>
+</div>
+
+<!-- ── OPÉRATIONS ── -->
+<h3 id="dl-ops">Opérations sur les DL</h3>
+
+<p>L'une des forces des DL est qu'on peut les combiner algébriquement comme des polynômes, <strong>sous réserve de ne garder que les termes pertinents</strong>.</p>
+
+<div class="callout theorem">
+<p>Soient \(f\) et \(g\) admettant des DL à l'ordre \(n\) en 0. Alors :</p>
+<p>• <strong>Somme :</strong> \(f+g\) admet un DL d'ordre \(n\), obtenu en additionnant terme à terme.</p>
+<p>• <strong>Produit :</strong> \(f \cdot g\) admet un DL d'ordre \(n\), obtenu en multipliant et en tronquant à l'ordre \(n\).</p>
+<p>• <strong>Composition :</strong> Si \(g(0)=0\), alors \(f \circ g\) admet un DL d'ordre \(n\) obtenu par substitution.</p>
+<p>• <strong>Quotient :</strong> Si \(g(0) \neq 0\), \(f/g\) admet un DL, obtenu par division euclidienne ou en utilisant \(1/(1+u)\).</p>
+<p>• <strong>Intégration :</strong> On peut intégrer un DL terme à terme (en augmentant l'ordre de 1).</p>
+<p>• <strong>Dérivation :</strong> On peut dériver un DL terme à terme (en diminuant l'ordre de 1).</p>
+</div>
+
+<div class="callout warning">
+<p><strong>Attention — La composition :</strong> Avant de substituer \(u = g(x)\) dans le DL de \(f\) en 0, il faut <strong>vérifier que \(g(x) \to 0\)</strong> quand \(x \to 0\). Si \(g(x) \to \ell \neq 0\), on doit utiliser le DL de \(f\) en \(\ell\), pas en 0.</p>
+<p>Exemple faux : \(\ln(\cos x)\) — on développe \(\cos x\) en 0, on obtient \(1 - x^2/2 + \ldots\). Comme \(\cos x \to 1\), on doit utiliser \(\ln(1+u)\) avec \(u = \cos x - 1 = -x^2/2 + \ldots \to 0\). ✓</p>
+</div>
+
+<div class="callout example">
+<p><strong>Calcul de DL par composition :</strong> Trouver le DL de \(\ln(\cos x)\) à l'ordre 4 en 0.</p>
+<p><strong>Étape 1 :</strong> DL de \(\cos x\) à l'ordre 4 :</p>
+<div class="math-block">\[\cos x = 1 - \frac{x^2}{2} + \frac{x^4}{24} + o(x^4)\]</div>
+<p><strong>Étape 2 :</strong> Poser \(u = \cos x - 1 = -\dfrac{x^2}{2} + \dfrac{x^4}{24} + o(x^4)\). On a \(u \to 0\).</p>
+<p><strong>Étape 3 :</strong> DL de \(\ln(1+u) = u - \dfrac{u^2}{2} + o(u^2)\). Or \(u^2 = \dfrac{x^4}{4} + o(x^4)\), donc :</p>
+<div class="math-block">\[\ln(\cos x) = \left(-\frac{x^2}{2} + \frac{x^4}{24}\right) - \frac{1}{2}\cdot\frac{x^4}{4} + o(x^4) = -\frac{x^2}{2} + \frac{x^4}{24} - \frac{x^4}{8} + o(x^4)\]</div>
+<div class="math-block">\[\boxed{\ln(\cos x) = -\frac{x^2}{2} - \frac{x^4}{12} + o(x^4)}\]</div>
+</div>
+
+<!-- ── APPLICATIONS ── -->
+<h3 id="dl-apps">Applications — Lever des formes indéterminées</h3>
+
+<p>Les DL sont l'outil par excellence pour calculer des limites de la forme \(\frac{0}{0}\), \(\frac{\infty}{\infty}\), \(\infty - \infty\), \(0 \cdot \infty\), etc.</p>
+
+<div class="callout method">
+<p><strong>Stratégie générale :</strong></p>
+<p>1. Identifier le point de passage à la limite et la forme indéterminée.</p>
+<p>2. Développer le numérateur et le dénominateur au même ordre.</p>
+<p>3. Simplifier par la plus petite puissance commune.</p>
+<p>4. La limite apparaît en regardant les termes de plus bas degré.</p>
+</div>
+
+<div class="callout example">
+<p><strong>Exemple 1 — Forme \(\frac{0}{0}\) :</strong> Calculer \(\displaystyle\lim_{x \to 0} \frac{e^x - 1 - x}{x^2}\).</p>
+<p>DL de \(e^x = 1 + x + \dfrac{x^2}{2} + o(x^2)\), donc :</p>
+<div class="math-block">\[\frac{e^x - 1 - x}{x^2} = \frac{\dfrac{x^2}{2} + o(x^2)}{x^2} = \frac{1}{2} + o(1) \xrightarrow[x\to 0]{} \frac{1}{2}\]</div>
+</div>
+
+<div class="callout example">
+<p><strong>Exemple 2 — Forme \(\infty - \infty\) :</strong> Calculer \(\displaystyle\lim_{x \to 0} \left(\frac{1}{\sin x} - \frac{1}{x}\right)\).</p>
+<div class="math-block">\[\frac{1}{\sin x} - \frac{1}{x} = \frac{x - \sin x}{x \sin x}\]</div>
+<p>DL : \(x - \sin x = x - \left(x - \dfrac{x^3}{6} + o(x^3)\right) = \dfrac{x^3}{6} + o(x^3)\).</p>
+<p>Et \(x\sin x = x\left(x + o(x)\right) = x^2 + o(x^2)\).</p>
+<div class="math-block">\[\frac{1}{\sin x} - \frac{1}{x} = \frac{x^3/6 + o(x^3)}{x^2 + o(x^2)} = \frac{x}{6} + o(x) \xrightarrow[x\to 0]{} 0\]</div>
+</div>
+
+<div class="callout example">
+<p><strong>Exemple 3 — Équivalent et nature d'une suite :</strong> Calculer la limite quand \(x\to 0\) de \(\dfrac{\tan x - \sin x}{x^3}\).</p>
+<div class="math-block">\[\tan x = x + \frac{x^3}{3} + o(x^3), \quad \sin x = x - \frac{x^3}{6} + o(x^3)\]</div>
+<div class="math-block">\[\tan x - \sin x = \frac{x^3}{3} + \frac{x^3}{6} + o(x^3) = \frac{x^3}{2} + o(x^3)\]</div>
+<div class="math-block">\[\frac{\tan x - \sin x}{x^3} \xrightarrow[x\to 0]{} \boxed{\frac{1}{2}}\]</div>
+</div>
+
+<div class="callout method">
+<p><strong>Trouver un équivalent :</strong> Le terme de plus bas degré non nul dans le DL d'une fonction \(f\) donne l'équivalent au voisinage de 0. Si \(f(x) = a_p x^p + o(x^p)\) avec \(a_p \neq 0\), alors \(f(x) \sim a_p x^p\) en 0.</p>
+</div>
+</section>
+
+<hr class="sep"/>
+
+<!-- ═══════════════════════════════════════════════════════
+     CHAPITRE 3
+═══════════════════════════════════════════════════════ -->
+<section id="ch3">
+<h2 id="param-def"><span class="chapter-num">Chap. 3</span> Courbes Paramétrées Planes</h2>
+
+<p class="lead">Un point se déplace dans le plan. Sa position \((x(t), y(t))\) dépend d'un paramètre \(t\) — souvent le temps. La courbe tracée s'appelle une <em>courbe paramétrée plane</em>. Ce cadre est plus général que celui des fonctions \(y = f(x)\) et permet de décrire des trajectoires complexes : ellipses, cycloïdes, rosaces...</p>
+
+<div class="callout definition">
+<p>Une <strong>courbe paramétrée plane</strong> est la donnée de :</p>
+<div class="math-block">
+\[\left\{\begin{array}{l} x = f(t) \\ y = g(t)\end{array}\right., \quad t \in I \subseteq \mathbb{R}\]
+</div>
+<p>où \(f, g : I \to \mathbb{R}\) sont des fonctions continues (en général \(\mathcal{C}^1\) ou \(\mathcal{C}^\infty\)).</p>
+<p>L'<strong>image</strong> (ou <strong>support</strong>) de la courbe est l'ensemble des points \(\{(f(t), g(t)) : t \in I\} \subseteq \mathbb{R}^2\).</p>
+</div>
+
+<div class="callout remark">
+<p><strong>Lien avec la cinématique :</strong> Si \(t\) est le temps, le point \(M(t) = (x(t), y(t))\) est un mobile. Son <strong>vecteur vitesse</strong> est \(\vec{v}(t) = (x'(t), y'(t))\). La norme \(\|\vec{v}(t)\| = \sqrt{x'(t)^2 + y'(t)^2}\) est la vitesse scalaire. Cette vision physique est très utile pour comprendre les points singuliers.</p>
+</div>
+
+<h3>Réduction du domaine d'étude</h3>
+
+<p>Avant de calculer quoi que ce soit, on cherche à <strong>réduire l'intervalle d'étude</strong> grâce aux symétries. Cela divise le travail.</p>
+
+<div class="callout method">
+<p><strong>Règles de réduction :</strong></p>
+<p>• <strong>Périodicité :</strong> Si \(f\) et \(g\) sont \(T\)-périodiques, on étudie sur un intervalle de longueur \(T\).</p>
+<p>• <strong>Parité de \(f\) et \(g\) :</strong></p>
+<p style="padding-left:1rem">— Si \(f\) est paire et \(g\) impaire : symétrie par rapport à l'axe \(Ox\). On étudie sur \([0, T/2]\) et on symétrise.</p>
+<p style="padding-left:1rem">— Si \(f\) est impaire et \(g\) paire : symétrie par rapport à l'axe \(Oy\).</p>
+<p style="padding-left:1rem">— Si \(f\) et \(g\) sont toutes deux impaires : symétrie par rapport à l'origine \(O\).</p>
+<p>• <strong>Substitution \(t \mapsto \pi - t\) (ou autre) :</strong> peut révéler des symétries supplémentaires.</p>
+</div>
+
+<div class="callout example">
+<p><strong>Exemple — Cycloïde :</strong> \(x(t) = t - \sin t\), \(y(t) = 1 - \cos t\), \(t \in \mathbb{R}\).</p>
+<p>Les fonctions sont \(2\pi\)-périodiques, donc on étudie sur \([0, 2\pi]\).</p>
+<p>On vérifie : \(x(\pi + t) - x(\pi) = t - \sin t\) (décalé), donc la courbe a des <em>arches</em> successives. Pas de symétrie axiale, mais une symétrie par translation.</p>
+</div>
+
+<!-- POINTS RÉGULIERS ET SINGULIERS -->
+<h3 id="param-etude">Étude locale — Points réguliers et singuliers</h3>
+
+<div class="callout definition">
+<p>Soit \(t_0 \in I\). Le point \(M_0 = M(t_0)\) est :</p>
+<p>• <strong>Régulier</strong> si \(\vec{v}(t_0) = (x'(t_0), y'(t_0)) \neq \vec{0}\). La courbe admet alors une tangente en \(M_0\), de vecteur directeur \(\vec{v}(t_0)\).</p>
+<p>• <strong>Stationnaire (ou singulier)</strong> si \(\vec{v}(t_0) = \vec{0}\), i.e., \(x'(t_0) = y'(t_0) = 0\).</p>
+</div>
+
+<p>Lorsque \(M_0\) est un point stationnaire, la direction de la tangente n'est plus évidente. Les DL deviennent indispensables.</p>
+
+<div class="callout theorem">
+<p><strong>Tangente en un point stationnaire par les DL :</strong></p>
+<p>Si \(x'(t_0) = y'(t_0) = 0\), on développe :</p>
+<div class="math-block">
+\[x(t_0+h) = x(t_0) + a_p h^p + o(h^p), \quad y(t_0+h) = y(t_0) + b_q h^q + o(h^q)\]
+</div>
+<p>où \(a_p\) est le premier coefficient non nul de \(x\), \(b_q\) celui de \(y\). Le <strong>vecteur tangent</strong> est obtenu par :</p>
+<p>• Si \(p < q\) : tangente horizontale \((1, 0)\).</p>
+<p>• Si \(p > q\) : tangente verticale \((0, 1)\).</p>
+<p>• Si \(p = q\) : vecteur \((a_p, b_q)\).</p>
+</div>
+
+<h3>Classification des points stationnaires</h3>
+
+<p>Lorsque la tangente existe en un point stationnaire, il faut déterminer la <strong>forme locale</strong> de la courbe : fait-elle un rebroussement ou passe-t-elle de façon régulière ?</p>
+
+<div class="callout definition">
+<p>Soit \(M_0\) un point stationnaire, et supposons que le vecteur tangent est \((a_p, b_p)\) (indices égaux, ordre \(p\)).</p>
+<p>• <strong>Point d'inflexion stationnaire :</strong> Si \(p\) est impair. La courbe traverse la tangente. Le paramètre \(h\) change de signe et les composantes aussi.</p>
+<p>• <strong>Rebroussement de 1ère espèce :</strong> Si \(p\) est pair et les ordres des termes suivants sont de la même parité. Le mobile "revient sur ses pas" en changeant de direction, et la tangente est atteinte par les deux côtés.</p>
+<p>• <strong>Rebroussement de 2ème espèce :</strong> Configuration plus complexe, où les deux branches de la courbe arrivent tangentiellement <em>du même côté</em> de la tangente.</p>
+</div>
+
+<!-- DIAGRAM: Rebroussements -->
+<div class="diagram-wrap">
+  <div class="diagram-title">🔀 Types de points singuliers — Schéma comparatif</div>
+  <svg width="100%" viewBox="0 0 680 240" role="img">
+    <title>Comparaison des types de points singuliers</title>
+    <defs>
+      <marker id="arr2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </marker>
+    </defs>
+
+    <!-- 1: Point régulier -->
+    <text x="113" y="22" text-anchor="middle" font-family="Outfit,sans-serif" font-size="11" font-weight="700" fill="#8a8aa0" letter-spacing="1">POINT RÉGULIER</text>
+    <line x1="30" y1="120" x2="196" y2="120" stroke="#2e2e3e" stroke-width="0.7"/>
+    <path d="M 35 165 C 60 135 80 100 113 95 C 146 100 166 135 192 165" fill="none" stroke="#60a5fa" stroke-width="2"/>
+    <circle cx="113" cy="95" r="4" fill="#60a5fa"/>
+    <line x1="75" y1="108" x2="152" y2="82" stroke="#a78bfa" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#arr2)"/>
+    <foreignObject x="43" y="178" width="140" height="24">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="text-align:center;font-size:13px;color:#60a5fa;font-family:'JetBrains Mono',monospace;">
+        \(\vec{v} \neq \vec{0}\)
+      </div>
+    </foreignObject>
+    <text x="113" y="210" text-anchor="middle" font-family="Outfit,sans-serif" font-size="11" fill="#5a5a70">Tangente claire</text>
+
+    <!-- Divider -->
+    <line x1="226" y1="10" x2="226" y2="230" stroke="#1e1e28" stroke-width="1"/>
+
+    <!-- 2: Inflexion stationnaire -->
+    <text x="340" y="22" text-anchor="middle" font-family="Outfit,sans-serif" font-size="11" font-weight="700" fill="#8a8aa0" letter-spacing="1">INFLEXION STATIONNAIRE</text>
+    <line x1="256" y1="120" x2="422" y2="120" stroke="#2e2e3e" stroke-width="0.7"/>
+    <path d="M 260 160 C 290 150 310 145 340 120 C 370 95 390 80 420 60" fill="none" stroke="#34d9b3" stroke-width="2"/>
+    <circle cx="340" cy="120" r="4" fill="#34d9b3"/>
+    <line x1="295" y1="145" x2="385" y2="95" stroke="#a78bfa" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#arr2)"/>
+    <text x="340" y="195" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" fill="#34d9b3">p impair</text>
+    <text x="340" y="210" text-anchor="middle" font-family="Outfit,sans-serif" font-size="11" fill="#5a5a70">Traverse la tangente</text>
+
+    <!-- Divider -->
+    <line x1="453" y1="10" x2="453" y2="230" stroke="#1e1e28" stroke-width="1"/>
+
+    <!-- 3: Rebroussement 1ère espèce -->
+    <text x="566" y="22" text-anchor="middle" font-family="Outfit,sans-serif" font-size="11" font-weight="700" fill="#8a8aa0" letter-spacing="1">REBROUSSEMENT 1re ESP.</text>
+    <line x1="466" y1="120" x2="648" y2="120" stroke="#2e2e3e" stroke-width="0.7"/>
+    <path d="M 480 80 C 510 95 530 108 556 115 C 580 108 600 80 630 55" fill="none" stroke="#f0c96a" stroke-width="2"/>
+    <circle cx="556" cy="115" r="4" fill="#f0c96a"/>
+    <line x1="490" y1="120" x2="630" y2="120" stroke="#a78bfa" stroke-width="1.2" stroke-dasharray="4 3"/>
+    <!-- Arrow left -->
+    <path d="M 545 78 L 528 90" stroke="#f0c96a" stroke-width="1.2" fill="none" marker-end="url(#arr2)"/>
+    <path d="M 566 78 L 583 60" stroke="#f0c96a" stroke-width="1.2" fill="none" marker-end="url(#arr2)"/>
+    <text x="566" y="195" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" fill="#f0c96a">p pair</text>
+    <text x="566" y="210" text-anchor="middle" font-family="Outfit,sans-serif" font-size="11" fill="#5a5a70">Mobile fait demi-tour</text>
+  </svg>
+  <p style="font-size:12.5px;color:#5a5a70;margin-top:0.75rem">À gauche : point régulier, tangente bien définie. Au centre : inflexion stationnaire (p impair), la courbe traverse sa tangente en "ralentissant". À droite : rebroussement de 1ère espèce (p pair), le mobile fait demi-tour au point singulier.</p>
+</div>
+
+<div class="callout example">
+<p><strong>Exemple — Rebroussement de 1ère espèce :</strong> Étudier la courbe \(x(t) = t^2\), \(y(t) = t^3\) en \(t=0\).</p>
+<p>On a \(x'(0) = 0\), \(y'(0) = 0\) : point stationnaire. DL :</p>
+<div class="math-block">\[x(h) = h^2, \quad y(h) = h^3\]</div>
+<p>Les ordres sont \(p=2\) (pour \(x\)) et \(q=3\) (pour \(y\)). Comme \(p < q\), la tangente est horizontale.</p>
+<p>Pour \(h > 0\) : \(x > 0\), \(y > 0\) (branche supérieure). Pour \(h < 0\) : \(x > 0\), \(y < 0\) (branche inférieure). C'est un <strong>rebroussement de 1ère espèce</strong> — les deux branches arrivent du même côté (\(x > 0\)) par la tangente horizontale.</p>
+<p>La courbe est la <strong>cubique semi-cubique</strong> : en éliminant \(t\), on obtient \(y^2 = x^3\) — une courbe en forme de pointe.</p>
+</div>
+
+<!-- BRANCHES INFINIES -->
+<h3 id="param-branches">Branches infinies</h3>
+
+<p>Une courbe a une <strong>branche infinie</strong> quand \(\|M(t)\| \to +\infty\) pour \(t \to t_0\) (fini ou infini). On cherche alors la direction asymptotique ou une asymptote.</p>
+
+<div class="callout method">
+<p><strong>Méthode — Asymptote oblique :</strong></p>
+<p>1. Calculer \(\ell = \displaystyle\lim_{t\to t_0} \dfrac{y(t)}{x(t)}\).</p>
+<p style="padding-left:1rem">• Si \(\ell = 0\) ou \(\ell = \infty\) : direction horizontale ou verticale.</p>
+<p style="padding-left:1rem">• Si \(\ell = a \in \mathbb{R}^*\) : direction \(y = ax\) (asymptote éventuellement oblique).</p>
+<p>2. Calculer \(b = \displaystyle\lim_{t\to t_0} \left(y(t) - a\,x(t)\right)\).</p>
+<p style="padding-left:1rem">• Si \(b \in \mathbb{R}\) : la droite \(y = ax + b\) est une asymptote oblique.</p>
+<p style="padding-left:1rem">• Si \(b = \pm\infty\) : branche parabolique de direction \(y = ax\).</p>
+</div>
+
+<div class="callout example">
+<p><strong>Exemple — Asymptote :</strong> \(x(t) = t + \frac{1}{t}\), \(y(t) = t - \frac{1}{t}\), quand \(t \to +\infty\).</p>
+<div class="math-block">\[\frac{y}{x} = \frac{t - 1/t}{t + 1/t} = \frac{1 - 1/t^2}{1 + 1/t^2} \to 1\]</div>
+<div class="math-block">\[y - x = \left(t - \frac{1}{t}\right) - \left(t + \frac{1}{t}\right) = -\frac{2}{t} \to 0\]</div>
+<p>Donc la droite \(y = x\) est une <strong>asymptote oblique</strong>. On peut même préciser que la courbe approche \(y=x\) par en dessous (car \(y - x = -2/t < 0\) pour \(t > 0\)).</p>
+</div>
+
+<!-- MÉTHODE COMPLÈTE -->
+<h3 id="param-methode">Méthode complète pour tracer une courbe paramétrée</h3>
+
+<div class="callout method">
+<p><strong>Plan d'étude type (à mémoriser !) :</strong></p>
+<p><strong>1. Domaine d'étude :</strong> Déterminer \(I\) naturel. Chercher périodicité et parités pour réduire.</p>
+<p><strong>2. Tableau de variations :</strong> Calculer \(x'(t)\), \(y'(t)\). Trouver les valeurs remarquables et les signes.</p>
+<p><strong>3. Points stationnaires :</strong> Résoudre \(x'=y'=0\) et classifier avec les DL.</p>
+<p><strong>4. Branches infinies :</strong> Étudier \(t \to \pm\infty\) ou \(t \to\) extrémités de \(I\).</p>
+<p><strong>5. Points d'auto-intersection :</strong> Résoudre \(M(t_1) = M(t_2)\) avec \(t_1 \neq t_2\).</p>
+<p><strong>6. Tracé :</strong> Joindre les points dans l'ordre croissant de \(t\), en respectant les tangentes.</p>
+</div>
+
+<!-- INTERACTIVE CURVE WIDGET -->
+<h3>Visualisation interactive</h3>
+<div class="diagram-wrap">
+  <div class="diagram-title">🎨 Traceur de courbes paramétrées</div>
+  <canvas id="curve-canvas"></canvas>
+  <div class="controls">
+    <label for="curve-select">Courbe</label>
+    <select id="curve-select">
+      <option value="astroid">Astroïde</option>
+      <option value="cycloid">Cycloïde</option>
+      <option value="lemniscate">Lemniscate</option>
+      <option value="cardioid">Cardioïde</option>
+      <option value="cusp">Cubique semi-cubique</option>
+    </select>
+    <label for="trange-slider">Paramètre t :</label>
+    <input type="range" id="trange-slider" min="0" max="100" value="100"/>
+    <output id="t-label">100%</output>
+  </div>
+  <div id="curve-desc" style="margin-top:0.75rem;font-size:12.5px;color:#6a6a80;font-family:var(--mono)"></div>
+</div>
+</section>
+
+<hr class="sep"/>
+
+<!-- ═══════════════════════════════════════════════════════
+     BÊTISIER
+═══════════════════════════════════════════════════════ -->
+<section id="betisier">
+<h2><span class="chapter-num">⚠️ Bêtisier</span> Les erreurs les plus fréquentes</h2>
+
+<p class="lead">Ce bêtisier est rédigé avec bienveillance — chacune de ces erreurs a été commise par des mathématiciens brillants. L'essentiel est de les comprendre et de les corriger.</p>
+
+<div class="error-card">
+  <div class="error-title">❌ Erreur 1 — Oublier le reste \(o(x^n)\)</div>
+  <p style="font-size:14.5px;color:#8a8aa0">Le DL <em>sans son reste</em> n'est qu'un polynôme — il n'a plus les propriétés de négligeabilité qui rendent les calculs licites.</p>
+  <span class="wrong">✗ FAUX : "Le DL de sin(x) à l'ordre 3 est sin(x) = x - x³/6."</span>
+  <span class="right">✓ JUSTE : "Le DL de sin(x) à l'ordre 3 en 0 est sin(x) = x - x³/6 + o(x³)."</span>
+  <p style="font-size:13px;color:#6a6a80;margin-top:0.5rem">Sans le <code>o(x³)</code>, on ne peut pas savoir si le terme négligé est de l'ordre de \(x^4\), \(x^{100}\) ou autre. Le reste est l'information qualitative essentielle.</p>
+</div>
+
+<div class="error-card">
+  <div class="error-title">❌ Erreur 2 — Composer sans vérifier la limite</div>
+  <p style="font-size:14.5px;color:#8a8aa0">On ne peut substituer \(u = g(x)\) dans le DL de \(f\) en 0 que si \(g(x) \to 0\).</p>
+  <span class="wrong">✗ FAUX : Développer ln(1+x²+2) par substitution directe dans ln(1+u) en 0.</span>
+  <span class="right">✓ JUSTE : Poser u = x²+2-1 = x²+1 → ... Attention : u → 1 ≠ 0 !</span>
+  <p style="font-size:13px;color:#6a6a80;margin-top:0.5rem">Toujours écrire \(f(g(x)) = f(\ell + (g(x) - \ell))\) et développer en \(\ell\) si \(g(x) \to \ell \neq 0\).</p>
+</div>
+
+<div class="error-card">
+  <div class="error-title">❌ Erreur 3 — Mélanger les ordres dans les opérations</div>
+  <p style="font-size:14.5px;color:#8a8aa0">Dans un produit ou une somme de DL, on ne peut pas garder des termes de degrés différents.</p>
+  <span class="wrong">✗ FAUX : sin(x)·cos(x) = (x - x³/6 + o(x³))(1 - x²/2 + x⁴/24 + o(x⁴))</span>
+  <span class="right">✓ JUSTE : On choisit l'ordre n voulu, et on tronque le produit à l'ordre n.</span>
+  <p style="font-size:13px;color:#6a6a80;margin-top:0.5rem">Si on veut un DL à l'ordre 3, on multiplie et on supprime tout terme de degré ≥ 4 dès qu'il apparaît. La clé : <em>définir l'ordre souhaité avant de commencer</em>.</p>
+</div>
+
+<div class="error-card">
+  <div class="error-title">❌ Erreur 4 — Confusion dans les symétries des courbes paramétrées</div>
+  <p style="font-size:14.5px;color:#8a8aa0">Beaucoup d'étudiants intervertissent les règles de symétrie.</p>
+  <span class="wrong">✗ FAUX : "Si x est paire et y est impaire, la courbe est symétrique par rapport à Oy."</span>
+  <span class="right">✓ JUSTE : Si x(-t) = x(t) et y(-t) = -y(t), la courbe est sym. / Ox (pas Oy).</span>
+  <p style="font-size:13px;color:#6a6a80;margin-top:0.5rem">Règle à retenir : la symétrie est <em>par rapport à l'axe de la fonction paire</em>. Si \(x\) est paire (symétrique en \(x\)) et \(y\) impaire (change de signe), le point \((x,-y)\) est aussi sur la courbe → symétrie par rapport à \(Ox\).</p>
+</div>
+
+<div class="error-card">
+  <div class="error-title">❌ Erreur 5 — Croire que l'égalité des DL implique l'égalité des fonctions</div>
+  <p style="font-size:14.5px;color:#8a8aa0">Deux fonctions peuvent avoir le même DL à tout ordre en 0 sans être égales.</p>
+  <span class="wrong">✗ FAUX : "Puisque f et g ont le même DL à tout ordre, alors f = g."</span>
+  <span class="right">✓ JUSTE : La fonction e^(-1/x²) a un DL nul à tout ordre en 0, mais n'est pas identiquement nulle.</span>
+  <p style="font-size:13px;color:#6a6a80;margin-top:0.5rem">Les DL sont des outils locaux. Ils ne capturent pas le comportement global d'une fonction, ni les propriétés qui se situent "au-delà de tout polynôme" (comme les exponentielles à décroissance rapide).</p>
+</div>
+</section>
+
+<hr class="sep"/>
+
+<!-- ═══════════════════════════════════════════════════════
+     CONCLUSION
+═══════════════════════════════════════════════════════ -->
+<section id="conclusion">
+<h2><span class="chapter-num">Fin</span> Bilan et perspectives</h2>
+
+<p class="lead">Vous êtes arrivés au terme de ce cours d'Analyse 3. C'est le moment de prendre du recul et d'apprécier le chemin parcouru.</p>
+
+<h3>Ce que vous avez appris</h3>
+
+<div class="three-col">
+  <div class="mini-card" style="border-color:rgba(124,106,247,0.3)">
+    <h4 style="color:var(--accent2)">🔧 Outils</h4>
+    <p style="font-size:14px">Trigonométrie, fonctions réciproques, hyperboliques — la boîte à outils complète de l'analyste.</p>
+  </div>
+  <div class="mini-card" style="border-color:rgba(52,217,179,0.3)">
+    <h4 style="color:var(--teal2)">📐 Approximations</h4>
+    <p style="font-size:14px">Formules de Taylor (Young, Lagrange, Maclaurin), DL des fonctions usuelles, opérations.</p>
+  </div>
+  <div class="mini-card" style="border-color:rgba(240,201,106,0.3)">
+    <h4 style="color:var(--gold2)">🌀 Courbes</h4>
+    <p style="font-size:14px">Courbes paramétrées planes, points singuliers, branches infinies, méthode complète d'étude.</p>
+  </div>
+</div>
+
+<h3>Ouverture vers l'Analyse 4</h3>
+
+<p>Ce cours était une préparation à des thèmes encore plus riches. Voici ce qui vous attend :</p>
+
+<div class="two-col">
+<div class="mini-card">
+  <h4>📡 Séries numériques et entières</h4>
+  <p style="font-size:14.5px">Les DL ne sont que des approximations tronquées. En Analyse 4, on étudie les <em>séries entières</em> \(\sum_{n=0}^{+\infty} a_n x^n\) — l'extension infinie des polynômes de Taylor — et leur rayon de convergence.</p>
+</div>
+<div class="mini-card">
+  <h4>∫ Intégrales généralisées</h4>
+  <p style="font-size:14.5px">Les DL permettent d'étudier la convergence d'intégrales telles que \(\int_0^1 \frac{\sin t}{t}\,dt\) ou \(\int_0^{+\infty} e^{-t^2}\,dt\) par des comparaisons fines.</p>
+</div>
+</div>
+
+<h3>Applications en physique et ingénierie</h3>
+
+<div class="callout remark">
+<p><strong>Pendule simple :</strong> L'équation \(\ddot{\theta} + \frac{g}{L}\sin\theta = 0\) est difficile à résoudre. Pour les petites oscillations, \(\sin\theta \approx \theta\) (DL à l'ordre 1), et on obtient l'équation harmonique classique. C'est l'utilisation des DL la plus répandue en physique.</p>
+</div>
+
+<div class="callout remark">
+<p><strong>Optique :</strong> Les aberrations des lentilles sont classifiées selon l'ordre du DL de l'indice de réfraction. Les aberrations de Seidel correspondent aux termes d'ordre 3 (au-delà de l'approximation paraxiale d'ordre 1).</p>
+</div>
+
+<div class="callout remark">
+<p><strong>Mécanique des fluides :</strong> Les équations de Navier-Stokes sont simplifiées par des DL pour les régimes laminaires ou les perturbations linéaires (stabilité linéaire).</p>
+</div>
+
+<div class="quote-block">
+  <p>"The essence of mathematics lies in its freedom."</p>
+  <div class="attr">— Georg Cantor</div>
+</div>
+
+<p style="text-align:center;color:var(--muted);font-size:1.1rem;font-family:var(--serif);font-style:italic;margin-top:2rem">
+Félicitations pour avoir parcouru ce cours. Les mathématiques ne se retiennent pas, elles se comprennent, se pratiquent, et finalement, se réinventent à chaque exercice.<br/><br/>
+</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     RÉSUMÉ DU COURS
+═══════════════════════════════════════════════════════ -->
+<hr class="sep"/>
+<section id="resume">
+<h2><span class="chapter-num">📋 Résumé</span> Synthèse du cours</h2>
+
+<p class="lead">Voici les formules et résultats essentiels à maîtriser pour l'examen. Ce résumé est un aide-mémoire — il ne remplace pas la compréhension des démonstrations.</p>
+
+<h3>Formules de Taylor — À connaître par cœur</h3>
+
+<div class="summary-grid">
+  <div class="summary-item">
+    <h4>🔵 Développements en 0 (Maclaurin)</h4>
+    <ul>
+      <li>\(e^x = \sum_{k=0}^n \frac{x^k}{k!} + o(x^n)\)</li>
+      <li>\(\sin x = x - \frac{x^3}{6} + \frac{x^5}{120} + o(x^{2n+1})\)</li>
+      <li>\(\cos x = 1 - \frac{x^2}{2} + \frac{x^4}{24} + o(x^{2n})\)</li>
+      <li>\(\ln(1+x) = x - \frac{x^2}{2} + \frac{x^3}{3} - \ldots + o(x^n)\)</li>
+      <li>\((1+x)^\alpha = 1 + \alpha x + \frac{\alpha(\alpha-1)}{2}x^2 + o(x^2)\)</li>
+      <li>\(\frac{1}{1-x} = 1 + x + x^2 + \ldots + x^n + o(x^n)\)</li>
+    </ul>
+  </div>
+  <div class="summary-item">
+    <h4>🟢 Formules clés</h4>
+    <ul>
+      <li><strong>Taylor-Young :</strong> \(f(x) = \sum_{k=0}^n \frac{f^{(k)}(a)}{k!}(x-a)^k + o((x-a)^n)\)</li>
+      <li><strong>Reste Lagrange :</strong> \(|R_n| \leq \frac{M_{n+1}}{(n+1)!}|x-a|^{n+1}\)</li>
+      <li><strong>Équivalent :</strong> Si \(f(x) = a_p x^p + o(x^p)\), alors \(f \sim a_p x^p\)</li>
+      <li><strong>Produit :</strong> Tronquer à l'ordre \(n\) voulu après multiplication</li>
+      <li><strong>Composition :</strong> Vérifier que \(g(x)\to 0\) avant \(f(g(x))\)</li>
+      <li><strong>Division :</strong> Mettre en facteur la plus petite puissance</li>
+    </ul>
+  </div>
+</div>
+
+<h3>Courbes paramétrées — Résumé des méthodes</h3>
+
+<div class="summary-grid">
+  <div class="summary-item">
+    <h4>📐 Points réguliers vs singuliers</h4>
+    <ul>
+      <li>Régulier : \((x'(t_0), y'(t_0)) \neq (0,0)\) → tangente = vecteur vitesse</li>
+      <li>Singulier : \(x'(t_0) = y'(t_0) = 0\) → utiliser les DL</li>
+      <li>Si \(p &lt; q\) : tangente horizontale</li>
+      <li>Si \(p &gt; q\) : tangente verticale</li>
+      <li>Si \(p = q\) : vecteur tangent \((a_p, b_q)\)</li>
+      <li>p impair → inflexion ; p pair → rebroussement</li>
+    </ul>
+  </div>
+  <div class="summary-item">
+    <h4>🌐 Branches infinies</h4>
+    <ul>
+      <li>Calculer \(\ell = \lim \frac{y(t)}{x(t)}\)</li>
+      <li>Si \(\ell \in \mathbb{R}^*\) : direction \(y = \ell x\)</li>
+      <li>Calculer \(b = \lim (y - \ell x)\)</li>
+      <li>Si \(b \in \mathbb{R}\) : asymptote \(y = \ell x + b\)</li>
+      <li>Si \(b = \pm\infty\) : branche parabolique</li>
+      <li>Si \(\ell = 0\) ou \(\infty\) : AH ou AV</li>
+    </ul>
+  </div>
+</div>
+
+<h3>Symétries des courbes paramétrées</h3>
+
+<div class="callout method">
+<p><strong>Tableau de réduction :</strong></p>
+<div class="dl-table-wrap">
+<table>
+  <thead><tr><th>x(−t)</th><th>y(−t)</th><th>Symétrie</th><th>Étude sur</th></tr></thead>
+  <tbody>
+    <tr><td>x(t) (paire)</td><td>−y(t) (impaire)</td><td>Par rapport à Ox</td><td>[0, T/2]</td></tr>
+    <tr><td>−x(t) (impaire)</td><td>y(t) (paire)</td><td>Par rapport à Oy</td><td>[0, T/2]</td></tr>
+    <tr><td>−x(t) (impaire)</td><td>−y(t) (impaire)</td><td>Par rapport à O</td><td>[0, T/2]</td></tr>
+    <tr><td>x(t) (paire)</td><td>y(t) (paire)</td><td>Pas de symétrie par parité</td><td>[0, T]</td></tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+<div class="quote-block">
+  <p>"In mathematics you don't understand things. You just get used to them."</p>
+  <div class="attr">— John von Neumann</div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     EXERCICES
+═══════════════════════════════════════════════════════ -->
+<hr class="sep"/>
+<section id="exercices">
+<h2><span class="chapter-num">✏️ Exercices</span> Entraînement et approfondissement</h2>
+
+<p class="lead">Ces exercices couvrent l'ensemble du cours, du plus accessible au plus exigeant. Essayez chaque exercice sans regarder l'indice, puis comparez votre approche.</p>
+
+<h3>Partie I — Développements limités</h3>
+
+<!-- Ex 1 -->
+<div class="exercise-card">
+  <div class="ex-header">
+    <span class="ex-num">Ex. 1</span>
+    <span class="ex-title">DL classiques à l'ordre 4</span>
+    <span class="ex-diff easy">Niveau 1</span>
+  </div>
+  <p>Écrire le développement limité à l'ordre 4 en 0 de chacune des fonctions suivantes :</p>
+  <p><strong>a)</strong> \(f(x) = e^{-x^2}\) &nbsp;&nbsp;&nbsp; <strong>b)</strong> \(g(x) = \cos(2x)\) &nbsp;&nbsp;&nbsp; <strong>c)</strong> \(h(x) = \ln(1 + \sin x)\)</p>
+  <button class="hint-btn" onclick="this.nextElementSibling.classList.toggle('visible'); this.textContent = this.nextElementSibling.classList.contains('visible') ? '🙈 Masquer l\'indice' : '💡 Voir l\'indice'">💡 Voir l'indice</button>
+  <div class="ex-hint">
+    <p><strong>a)</strong> Remplacer \(x\) par \(-x^2\) dans \(e^u = 1 + u + \frac{u^2}{2} + \ldots\). Attention : \((-x^2)^2 = x^4\), donc on obtient des termes jusqu'à \(x^4\).</p>
+    <p><strong>b)</strong> Remplacer \(x\) par \(2x\) dans \(\cos u = 1 - \frac{u^2}{2} + \frac{u^4}{24} + \ldots\)</p>
+    <p><strong>c)</strong> Écrire \(\ln(1+u)\) avec \(u = \sin x = x - \frac{x^3}{6} + o(x^3) \to 0\). Développer \(\ln(1+u) = u - \frac{u^2}{2} + \frac{u^3}{3} + o(u^3)\) et substituer.</p>
+  </div>
+</div>
+
+<!-- Ex 2 -->
+<div class="exercise-card">
+  <div class="ex-header">
+    <span class="ex-num">Ex. 2</span>
+    <span class="ex-title">Calcul de limites par DL</span>
+    <span class="ex-diff easy">Niveau 1</span>
+  </div>
+  <p>Calculer les limites suivantes en utilisant les développements limités :</p>
+  <div class="math-block">\[\textbf{a)}\ \lim_{x \to 0} \frac{e^x - 1 - x - x^2/2}{x^3} \qquad \textbf{b)}\ \lim_{x \to 0} \frac{\cos x - 1 + x^2/2}{x^4} \qquad \textbf{c)}\ \lim_{x \to 0} \frac{\ln(1+x) - \sin x}{x^2}\]</div>
+  <button class="hint-btn" onclick="this.nextElementSibling.classList.toggle('visible'); this.textContent = this.nextElementSibling.classList.contains('visible') ? '🙈 Masquer l\'indice' : '💡 Voir l\'indice'">💡 Voir l'indice</button>
+  <div class="ex-hint">
+    <p>Pour chaque limite, développer le numérateur à un ordre suffisant pour faire apparaître un terme non nul après simplification par \(x^k\). Pour <strong>a)</strong>, le DL d'ordre 3 de \(e^x\) suffit. Pour <strong>b)</strong>, il faut l'ordre 4 de \(\cos x\). Pour <strong>c)</strong>, l'ordre 2 suffit. Réponses : <strong>a)</strong> \(\frac{1}{6}\), <strong>b)</strong> \(\frac{1}{24}\), <strong>c)</strong> \(\frac{-1}{2}\).</p>
+  </div>
+</div>
+
+<!-- Ex 3 -->
+<div class="exercise-card">
+  <div class="ex-header">
+    <span class="ex-num">Ex. 3</span>
+    <span class="ex-title">DL d'un quotient et équivalent</span>
+    <span class="ex-diff medium">Niveau 2</span>
+  </div>
+  <p>Trouver le DL à l'ordre 3 en 0 de \(\displaystyle f(x) = \frac{\sin x}{1 + x^2}\), puis en déduire un équivalent de \(f\) au voisinage de 0.</p>
+  <button class="hint-btn" onclick="this.nextElementSibling.classList.toggle('visible'); this.textContent = this.nextElementSibling.classList.contains('visible') ? '🙈 Masquer l\'indice' : '💡 Voir l\'indice'">💡 Voir l'indice</button>
+  <div class="ex-hint">
+    <p>Écrire \(\frac{1}{1+x^2} = 1 - x^2 + o(x^2)\) (DL à l'ordre 2, car le numérateur commence en \(x^1\) et on veut un résultat à l'ordre 3).</p>
+    <p>Multiplier par \(\sin x = x - \frac{x^3}{6} + o(x^3)\) et ne garder que les termes de degré \(\leq 3\).</p>
+    <p>Résultat : \(f(x) = x - \frac{7}{6}x^3 + o(x^3)\). L'équivalent en 0 est \(f(x) \sim x\).</p>
+  </div>
+</div>
+
+<!-- Ex 4 -->
+<div class="exercise-card">
+  <div class="ex-header">
+    <span class="ex-num">Ex. 4</span>
+    <span class="ex-title">Forme indéterminée \(\infty - \infty\)</span>
+    <span class="ex-diff medium">Niveau 2</span>
+  </div>
+  <p>Calculer \(\displaystyle\lim_{x \to 0} \left(\frac{1}{x^2} - \frac{\cos x}{\sin^2 x}\right)\).</p>
+  <button class="hint-btn" onclick="this.nextElementSibling.classList.toggle('visible'); this.textContent = this.nextElementSibling.classList.contains('visible') ? '🙈 Masquer l\'indice' : '💡 Voir l\'indice'">💡 Voir l'indice</button>
+  <div class="ex-hint">
+    <p>Mettre au même dénominateur : \(\frac{\sin^2 x - x^2 \cos x}{x^2 \sin^2 x}\). Au voisinage de 0, \(x^2 \sin^2 x \sim x^4\). Développer le numérateur à l'ordre 4 :</p>
+    <p>\(\sin^2 x = x^2 - \frac{x^4}{3} + o(x^4)\) et \(x^2 \cos x = x^2 - \frac{x^4}{2} + o(x^4)\).</p>
+    <p>Donc numérateur \(= x^2 - \frac{x^4}{3} - x^2 + \frac{x^4}{2} + o(x^4) = \frac{x^4}{6} + o(x^4)\).</p>
+    <p>La limite est \(\frac{1}{6}\).</p>
+  </div>
+</div>
+
+<!-- Ex 5 -->
+<div class="exercise-card">
+  <div class="ex-header">
+    <span class="ex-num">Ex. 5</span>
+    <span class="ex-title">DL en un point \(a \neq 0\)</span>
+    <span class="ex-diff medium">Niveau 2</span>
+  </div>
+  <p>Écrire le DL à l'ordre 2 de \(f(x) = \sqrt{x}\) au voisinage de \(a = 4\).</p>
+  <p><em>Bonus :</em> En déduire une approximation de \(\sqrt{4{,}02}\) et estimer l'erreur grâce au reste de Lagrange.</p>
+  <button class="hint-btn" onclick="this.nextElementSibling.classList.toggle('visible'); this.textContent = this.nextElementSibling.classList.contains('visible') ? '🙈 Masquer l\'indice' : '💡 Voir l\'indice'">💡 Voir l'indice</button>
+  <div class="ex-hint">
+    <p>Calculer \(f(4) = 2\), \(f'(x) = \frac{1}{2\sqrt{x}}\) donc \(f'(4) = \frac{1}{4}\), et \(f''(x) = -\frac{1}{4x^{3/2}}\) donc \(f''(4) = -\frac{1}{32}\).</p>
+    <p>DL : \(\sqrt{x} = 2 + \frac{1}{4}(x-4) - \frac{1}{64}(x-4)^2 + o((x-4)^2)\).</p>
+    <p>Pour \(\sqrt{4{,}02}\) : poser \(x-4 = 0{,}02\). On obtient \(\approx 2 + 0{,}005 - 0{,}000006 \approx 2{,}004994\).</p>
+  </div>
+</div>
+
+<h3>Partie II — Courbes paramétrées</h3>
+
+<!-- Ex 6 -->
+<div class="exercise-card">
+  <div class="ex-header">
+    <span class="ex-num">Ex. 6</span>
+    <span class="ex-title">Étude d'une astroïde</span>
+    <span class="ex-diff medium">Niveau 2</span>
+  </div>
+  <p>Soit la courbe paramétrée (astroïde) : \(x(t) = \cos^3 t\), \(y(t) = \sin^3 t\), \(t \in [0, 2\pi]\).</p>
+  <p><strong>1.</strong> Montrer que la courbe a une symétrie par rapport aux deux axes de coordonnées et à l'origine. En déduire le domaine d'étude.</p>
+  <p><strong>2.</strong> Montrer que les points \(t = 0, \frac{\pi}{2}, \pi, \frac{3\pi}{2}\) sont des points stationnaires.</p>
+  <p><strong>3.</strong> Déterminer la tangente et la nature du point stationnaire en \(t = 0\).</p>
+  <p><strong>4.</strong> Dresser le tableau de variations et tracer la courbe sur \([0, \frac{\pi}{2}]\), puis déduire la courbe complète.</p>
+  <button class="hint-btn" onclick="this.nextElementSibling.classList.toggle('visible'); this.textContent = this.nextElementSibling.classList.contains('visible') ? '🙈 Masquer l\'indice' : '💡 Voir l\'indice'">💡 Voir l'indice</button>
+  <div class="ex-hint">
+    <p><strong>1.</strong> Vérifier que \(x(-t) = x(t)\), \(y(-t) = -y(t)\) (symétrie/Ox), et \(x(\pi-t) = -x(t)\), \(y(\pi-t) = y(t)\) (symétrie/Oy). Donc on étudie sur \([0, \pi/2]\).</p>
+    <p><strong>2.</strong> \(x'(t) = -3\cos^2 t \sin t\) et \(y'(t) = 3\sin^2 t \cos t\). Les deux s'annulent simultanément quand \(\sin t = 0\) ou \(\cos t = 0\).</p>
+    <p><strong>3.</strong> En \(t=0\) : \(x(h) = \cos^3 h = 1 - \frac{3h^2}{2} + o(h^2)\), \(y(h) = \sin^3 h = h^3 + o(h^3)\). Comme \(p=2 &lt; q=3\), la tangente est horizontale. C'est un rebroussement de 1ère espèce (p=2 pair).</p>
+  </div>
+</div>
+
+<!-- Ex 7 -->
+<div class="exercise-card">
+  <div class="ex-header">
+    <span class="ex-num">Ex. 7</span>
+    <span class="ex-title">Asymptote d'une courbe paramétrée</span>
+    <span class="ex-diff medium">Niveau 2</span>
+  </div>
+  <p>Étudier les branches infinies de la courbe \(x(t) = t^2 + \frac{1}{t}\), \(y(t) = t - \frac{1}{t^2}\) quand \(t \to +\infty\) et quand \(t \to 0^+\).</p>
+  <button class="hint-btn" onclick="this.nextElementSibling.classList.toggle('visible'); this.textContent = this.nextElementSibling.classList.contains('visible') ? '🙈 Masquer l\'indice' : '💡 Voir l\'indice'">💡 Voir l'indice</button>
+  <div class="ex-hint">
+    <p><strong>Quand \(t \to +\infty\) :</strong> \(x \sim t^2\) et \(y \sim t\). Donc \(\frac{y}{x} \sim \frac{t}{t^2} = \frac{1}{t} \to 0\). La direction est horizontale (pas d'asymptote oblique). On vérifie que \(y \to +\infty\) : branche parabolique de direction Ox.</p>
+    <p><strong>Quand \(t \to 0^+\) :</strong> \(x \sim \frac{1}{t} \to +\infty\) et \(y \sim -\frac{1}{t^2} \to -\infty\). La direction : \(\frac{y}{x} \sim \frac{-1/t^2}{1/t} = -\frac{1}{t} \to -\infty\). Branche de direction verticale (Oy). Précisément : \(\frac{x}{y} \sim -t \to 0\) donc la direction asymptotique est l'axe Oy.</p>
+  </div>
+</div>
+
+<!-- Ex 8 -->
+<div class="exercise-card">
+  <div class="ex-header">
+    <span class="ex-num">Ex. 8</span>
+    <span class="ex-title">Étude complète — La cardioïde</span>
+    <span class="ex-diff hard">Niveau 3</span>
+  </div>
+  <p>Mener l'étude complète de la <strong>cardioïde</strong> : \(x(t) = (1-\cos t)\cos t\), \(y(t) = (1-\cos t)\sin t\), \(t \in [0, 2\pi]\).</p>
+  <p><strong>1.</strong> Étudier la symétrie et réduire le domaine d'étude à \([0, \pi]\).</p>
+  <p><strong>2.</strong> Dresser le tableau de variations (calculer \(x'\) et \(y'\)).</p>
+  <p><strong>3.</strong> Étudier le point stationnaire en \(t=0\) par les DL à l'ordre 2 en 0.</p>
+  <p><strong>4.</strong> Calculer les coordonnées des points remarquables (\(t = \frac{\pi}{2}, \pi\)) et les tangentes en ces points.</p>
+  <p><strong>5.</strong> Tracer la courbe en joignant les points dans l'ordre croissant de \(t\).</p>
+  <button class="hint-btn" onclick="this.nextElementSibling.classList.toggle('visible'); this.textContent = this.nextElementSibling.classList.contains('visible') ? '🙈 Masquer l\'indice' : '💡 Voir l\'indice'">💡 Voir l'indice</button>
+  <div class="ex-hint">
+    <p><strong>1.</strong> \(x(-t) = x(t)\) et \(y(-t) = -y(t)\) → symétrie par rapport à Ox → étude sur \([0, \pi]\).</p>
+    <p><strong>2.</strong> \(x'(t) = \sin t(2\cos t - 1)\) et \(y'(t) = (1-\cos t)\cos t + \sin^2 t = 1 - \cos t + \cos 2t - \cos^2 t\). Les points stationnaires vérifient \(x'=y'=0\).</p>
+    <p><strong>3.</strong> En \(t=0\) : \(1 - \cos t = \frac{t^2}{2} + o(t^2)\). Donc \(x(t) \approx \frac{t^2}{2}\cos 0 = \frac{t^2}{2}\) et \(y(t) \approx \frac{t^2}{2}\cdot t = \frac{t^3}{2}\). Ordre \(p=2 &lt; q=3\) → tangente horizontale, rebroussement de 1ère espèce.</p>
+    <p><strong>4.</strong> En \(t=\pi/2\) : \(M = (0, 1)\), vecteur vitesse \((x'(\pi/2), y'(\pi/2)) = (-1, 0)\) → tangente horizontale. En \(t=\pi\) : \(M = (-2, 0)\), vecteur vitesse \((0, 0)\) → autre point stationnaire.</p>
+  </div>
+</div>
+
+<!-- Ex 9 -->
+<div class="exercise-card">
+  <div class="ex-header">
+    <span class="ex-num">Ex. 9</span>
+    <span class="ex-title">DL et approximation numérique</span>
+    <span class="ex-diff hard">Niveau 3</span>
+  </div>
+  <p>On souhaite calculer \(\pi\) grâce à la formule de Leibniz : \(\arctan(1) = \frac{\pi}{4}\).</p>
+  <p><strong>1.</strong> Montrer que \(\arctan x = x - \frac{x^3}{3} + \frac{x^5}{5} - \ldots + \frac{(-1)^n x^{2n+1}}{2n+1} + o(x^{2n+1})\).</p>
+  <p><strong>2.</strong> En déduire que \(\pi = 4\sum_{k=0}^n \frac{(-1)^k}{2k+1} + R_n\). Montrer que \(|R_n| \leq \frac{4}{2n+3}\).</p>
+  <p><strong>3.</strong> Combien de termes faut-il pour avoir \(\pi\) à \(10^{-3}\) près ? La formule est-elle efficace ?</p>
+  <p><strong>4.</strong> <em>(Bonus)</em> On utilise plutôt la formule de Machin : \(\frac{\pi}{4} = 4\arctan\frac{1}{5} - \arctan\frac{1}{239}\). Pourquoi est-ce plus efficace ?</p>
+  <button class="hint-btn" onclick="this.nextElementSibling.classList.toggle('visible'); this.textContent = this.nextElementSibling.classList.contains('visible') ? '🙈 Masquer l\'indice' : '💡 Voir l\'indice'">💡 Voir l'indice</button>
+  <div class="ex-hint">
+    <p><strong>1.</strong> Dériver : \((\arctan x)' = \frac{1}{1+x^2} = \sum_{k=0}^n (-1)^k x^{2k} + o(x^{2n})\). Intégrer terme à terme (licite ici) en utilisant \(\arctan(0) = 0\).</p>
+    <p><strong>2.</strong> Le reste est majoré par le premier terme négligé (série alternante à termes décroissants) : \(|R_n| \leq \frac{4}{2n+3}\).</p>
+    <p><strong>3.</strong> Il faut \(\frac{4}{2n+3} \leq 10^{-3}\), soit \(2n+3 \geq 4000\), c'est-à-dire \(n \geq 1999\). Très lent ! La formule de Leibniz converge trop lentement pour le calcul numérique.</p>
+    <p><strong>4.</strong> Les arguments \(\frac{1}{5}\) et \(\frac{1}{239}\) sont beaucoup plus petits que 1, donc les termes de la série décroissent bien plus vite. La convergence est exponentiellement plus rapide.</p>
+  </div>
+</div>
+
+<!-- Ex 10 -->
+<div class="exercise-card">
+  <div class="ex-header">
+    <span class="ex-num">Ex. 10</span>
+    <span class="ex-title">Problème ouvert — Courbe de Lissajous</span>
+    <span class="ex-diff hard">Niveau 3</span>
+  </div>
+  <p>Soit la courbe de Lissajous : \(x(t) = \sin(2t)\), \(y(t) = \sin(3t)\), \(t \in [0, 2\pi]\).</p>
+  <p><strong>1.</strong> Quelle est la période de chaque composante ? En déduire la période commune de la courbe.</p>
+  <p><strong>2.</strong> La courbe admet-elle des symétries ? Justifier rigoureusement.</p>
+  <p><strong>3.</strong> Trouver tous les points d'auto-intersection : résoudre \(x(t_1) = x(t_2)\), \(y(t_1) = y(t_2)\) avec \(t_1 \neq t_2\) dans \([0, 2\pi]\).</p>
+  <p><strong>4.</strong> Compter le nombre de boucles. Quelle relation y a-t-il entre les fréquences (2 et 3) et le nombre de boucles ?</p>
+  <button class="hint-btn" onclick="this.nextElementSibling.classList.toggle('visible'); this.textContent = this.nextElementSibling.classList.contains('visible') ? '🙈 Masquer l\'indice' : '💡 Voir l\'indice'">💡 Voir l'indice</button>
+  <div class="ex-hint">
+    <p><strong>1.</strong> \(\sin(2t)\) est \(\pi\)-périodique, \(\sin(3t)\) est \(\frac{2\pi}{3}\)-périodique. La période commune est le PPCM : \(2\pi\).</p>
+    <p><strong>2.</strong> \(x(-t) = -x(t)\) (impaire), \(y(-t) = -y(t)\) (impaire) → symétrie par rapport à O. De plus, \(x(\pi/2 - t) = \sin(\pi - 2t) = \sin(2t) = x(t)\) et \(y(\pi/2-t) = \sin(3\pi/2 - 3t) = -\cos(3t) \neq \pm y(t)\) en général — pas de symétrie/Oy.</p>
+    <p><strong>3.</strong> Analyser quand \(\sin(2t_1) = \sin(2t_2)\) ET \(\sin(3t_1) = \sin(3t_2)\) avec \(t_1 \neq t_2\). Utiliser les identités \(\sin\alpha = \sin\beta \Leftrightarrow \alpha = \beta + 2k\pi\) ou \(\alpha = \pi - \beta + 2k\pi\).</p>
+    <p><strong>4.</strong> Pour des fréquences \(p\) et \(q\) premières entre elles, une courbe de Lissajous a \((p-1)(q-1)/2 + \ldots\) points d'auto-intersection. Ici, avec \(p=2, q=3\), on attend \((2-1)(3-1) = 2\) points intérieurs, soit 2 boucles.</p>
+  </div>
+</div>
+
+<div class="callout remark">
+<p><strong>Pour aller plus loin :</strong> Les exercices 8, 9 et 10 sont de niveau concours (CPGE, licence avancée). Ne vous découragez pas si vous bloquez — revenez au cours, relisez les méthodes, et réessayez. La persévérance est la compétence n°1 en mathématiques.</p>
+</div>
+
+<hr class="sep"/>
+<h3>Partie III — Exercices de type Bibmath (niveau avancé)</h3>
+<p class="lead">Les exercices suivants s'inspirent du style Bibmath : énoncés précis, approche rigoureuse, et résultats qui demandent une vraie réflexion mathématique.</p>
+
+<!-- Ex 11 -->
+<div class="exercise-card">
+  <div class="ex-header">
+    <span class="ex-num">Ex. 11</span>
+    <span class="ex-title">DL et équivalents — Limites classiques</span>
+    <span class="ex-diff easy">Niveau 1</span>
+  </div>
+  <p>Calculer les limites suivantes en utilisant les développements limités :</p>
+  <p><strong>a)</strong> \(\displaystyle\lim_{x\to 0}\frac{e^x - 1 - x}{\sin(x^2)}\)</p>
+  <p><strong>b)</strong> \(\displaystyle\lim_{x\to 0}\frac{\ln(1+x) - x + \frac{x^2}{2}}{x^3}\)</p>
+  <p><strong>c)</strong> \(\displaystyle\lim_{x\to 0}\frac{(1+x)^{1/x} - e}{x}\)</p>
+  <button class="hint-btn" onclick="this.nextElementSibling.classList.toggle('visible'); this.textContent = this.nextElementSibling.classList.contains('visible') ? '🙈 Masquer l\'indice' : '💡 Voir l\'indice'">💡 Voir l'indice</button>
+  <div class="ex-hint">
+    <p><strong>a)</strong> Numérateur : \(e^x - 1 - x = \frac{x^2}{2} + o(x^2)\). Dénominateur : \(\sin(x^2) = x^2 + o(x^2)\). Donc la limite est \(\frac{1/2}{1} = \frac{1}{2}\).</p>
+    <p><strong>b)</strong> On sait que \(\ln(1+x) = x - \frac{x^2}{2} + \frac{x^3}{3} + o(x^3)\). Donc \(\ln(1+x) - x + \frac{x^2}{2} = \frac{x^3}{3} + o(x^3)\). La limite est \(\frac{1}{3}\).</p>
+    <p><strong>c)</strong> Écrire \((1+x)^{1/x} = e^{\frac{\ln(1+x)}{x}}\). DL de \(\frac{\ln(1+x)}{x} = 1 - \frac{x}{2} + \frac{x^2}{3} + o(x^2)\). Puis DL de \(e^{1 - x/2 + \ldots} = e \cdot e^{-x/2 + \ldots} = e(1 - \frac{x}{2} + o(x))\). La limite est \(-\frac{e}{2}\).</p>
+  </div>
+</div>
+
+<!-- Ex 12 -->
+<div class="exercise-card">
+  <div class="ex-header">
+    <span class="ex-num">Ex. 12</span>
+    <span class="ex-title">DL en un point différent de 0</span>
+    <span class="ex-diff easy">Niveau 1</span>
+  </div>
+  <p>Donner le DL à l'ordre 3 au voisinage du point indiqué :</p>
+  <p><strong>a)</strong> \(f(x) = \ln x\) au voisinage de \(a = 1\).</p>
+  <p><strong>b)</strong> \(g(x) = \sqrt{x}\) au voisinage de \(a = 4\).</p>
+  <p><strong>c)</strong> \(h(x) = \tan x\) au voisinage de \(a = \frac{\pi}{4}\).</p>
+  <button class="hint-btn" onclick="this.nextElementSibling.classList.toggle('visible'); this.textContent = this.nextElementSibling.classList.contains('visible') ? '🙈 Masquer l\'indice' : '💡 Voir l\'indice'">💡 Voir l'indice</button>
+  <div class="ex-hint">
+    <p><strong>a)</strong> Poser \(h = x-1\) : \(\ln(1+h) = h - \frac{h^2}{2} + \frac{h^3}{3} + o(h^3)\).</p>
+    <p><strong>b)</strong> \(\sqrt{4+h} = 2\sqrt{1+h/4} = 2(1 + \frac{h}{8} - \frac{h^2}{128} + \frac{h^3}{1024} + o(h^3))\).</p>
+    <p><strong>c)</strong> Utiliser la formule de Taylor : \(h(a+t) = h(a) + h'(a)t + \frac{h''(a)}{2}t^2 + \frac{h'''(a)}{6}t^3 + o(t^3)\). Ici \(\tan(\pi/4)=1\), \((1+\tan^2)(\pi/4)=2\), etc.</p>
+  </div>
+</div>
+
+<!-- Ex 13 -->
+<div class="exercise-card">
+  <div class="ex-header">
+    <span class="ex-num">Ex. 13</span>
+    <span class="ex-title">Inégalité et reste de Lagrange</span>
+    <span class="ex-diff medium">Niveau 2</span>
+  </div>
+  <p>Montrer les inégalités suivantes à l'aide de la formule de Taylor-Lagrange :</p>
+  <p><strong>a)</strong> Pour tout \(x \geq 0\) : \(e^x \geq 1 + x + \frac{x^2}{2}\).</p>
+  <p><strong>b)</strong> Pour tout \(x \in \mathbb{R}\) : \(\left|\sin x - x + \frac{x^3}{6}\right| \leq \frac{|x|^5}{120}\).</p>
+  <p><strong>c)</strong> Pour \(0 \leq x \leq 1\) : \(x - \frac{x^2}{2} \leq \ln(1+x) \leq x\).</p>
+  <button class="hint-btn" onclick="this.nextElementSibling.classList.toggle('visible'); this.textContent = this.nextElementSibling.classList.contains('visible') ? '🙈 Masquer l\'indice' : '💡 Voir l\'indice'">💡 Voir l'indice</button>
+  <div class="ex-hint">
+    <p><strong>a)</strong> La formule de Taylor-Lagrange donne \(e^x = 1 + x + \frac{x^2}{2} + \frac{x^3}{6}e^c\) pour un \(c \in ]0, x[\). Puisque \(e^c > 0\) et \(x^3 \geq 0\) pour \(x \geq 0\), le reste est positif.</p>
+    <p><strong>b)</strong> Taylor d'ordre 4 : \(\sin x = x - \frac{x^3}{6} + \frac{\cos(c)}{5!}x^5\). Le reste est majoré par \(\frac{|x|^5}{120}\) car \(|\cos(c)| \leq 1\).</p>
+    <p><strong>c)</strong> Écrire \(\ln(1+x) = x - \frac{x^2}{2(1+c)^2} \cdot \frac{1}{2} + \ldots\). Pour l'encadrement, utiliser que \(\ln\) est concave et que la tangente en 0 est \(y = x\).</p>
+  </div>
+</div>
+
+<!-- Ex 14 -->
+<div class="exercise-card">
+  <div class="ex-header">
+    <span class="ex-num">Ex. 14</span>
+    <span class="ex-title">Développement limité d'une intégrale</span>
+    <span class="ex-diff medium">Niveau 2</span>
+  </div>
+  <p>Pour chacune des fonctions définies par une intégrale, donner un DL à l'ordre indiqué :</p>
+  <p><strong>a)</strong> \(\displaystyle F(x) = \int_0^x \frac{\sin t}{t}\,dt\) à l'ordre 5 en 0.</p>
+  <p><strong>b)</strong> \(\displaystyle G(x) = \int_0^x e^{-t^2}\,dt\) à l'ordre 7 en 0.</p>
+  <p><strong>c)</strong> Calculer \(\displaystyle\lim_{x\to 0}\frac{G(x)}{x}\) sans calculer la limite directement.</p>
+  <button class="hint-btn" onclick="this.nextElementSibling.classList.toggle('visible'); this.textContent = this.nextElementSibling.classList.contains('visible') ? '🙈 Masquer l\'indice' : '💡 Voir l\'indice'">💡 Voir l'indice</button>
+  <div class="ex-hint">
+    <p><strong>a)</strong> Écrire \(\frac{\sin t}{t} = 1 - \frac{t^2}{6} + \frac{t^4}{120} + o(t^4)\), puis intégrer terme à terme : \(F(x) = x - \frac{x^3}{18} + \frac{x^5}{600} + o(x^5)\).</p>
+    <p><strong>b)</strong> \(e^{-t^2} = 1 - t^2 + \frac{t^4}{2} - \frac{t^6}{6} + o(t^6)\). Intégrer : \(G(x) = x - \frac{x^3}{3} + \frac{x^5}{10} - \frac{x^7}{42} + o(x^7)\).</p>
+    <p><strong>c)</strong> \(\frac{G(x)}{x} = 1 - \frac{x^2}{3} + o(x^2) \xrightarrow[x\to 0]{} 1\). Ou simplement : par le TFI, \(G'(0) = e^0 = 1\), et \(G(0)=0\), donc \(\lim \frac{G(x)}{x} = G'(0) = 1\).</p>
+  </div>
+</div>
+
+<!-- Ex 15 -->
+<div class="exercise-card">
+  <div class="ex-header">
+    <span class="ex-num">Ex. 15</span>
+    <span class="ex-title">Position d'une courbe par rapport à sa tangente</span>
+    <span class="ex-diff medium">Niveau 2</span>
+  </div>
+  <p>Pour chaque courbe, déterminer l'équation de la tangente en \(x_0 = 0\) et la position de la courbe par rapport à cette tangente au voisinage de 0 :</p>
+  <p><strong>a)</strong> \(y = x e^x\) &nbsp;&nbsp; <strong>b)</strong> \(y = \ln(1 + x^2)\) &nbsp;&nbsp; <strong>c)</strong> \(y = \sin x - \tan x\)</p>
+  <button class="hint-btn" onclick="this.nextElementSibling.classList.toggle('visible'); this.textContent = this.nextElementSibling.classList.contains('visible') ? '🙈 Masquer l\'indice' : '💡 Voir l\'indice'">💡 Voir l'indice</button>
+  <div class="ex-hint">
+    <p><strong>a)</strong> \(xe^x = x + x^2 + \frac{x^3}{2} + o(x^3)\). Tangente : \(y = x\). Reste dominant : \(+x^2 > 0\) pour \(x \neq 0\) → la courbe est <em>au-dessus</em> de sa tangente au voisinage de 0 (point d'inflexion n'est pas le cas ici).</p>
+    <p><strong>b)</strong> \(\ln(1+x^2) = x^2 - \frac{x^4}{2} + o(x^4)\). Tangente : \(y = 0\) (axe des abscisses). Signe de \(x^2 > 0\) → courbe au-dessus de Ox.</p>
+    <p><strong>c)</strong> \(\sin x - \tan x = -\frac{x^3}{2} + o(x^3)\). Tangente : \(y = 0\). Reste : \(-\frac{x^3}{2}\) change de signe → <em>point d'inflexion</em> en 0.</p>
+  </div>
+</div>
+
+<!-- Ex 16 -->
+<div class="exercise-card">
+  <div class="ex-header">
+    <span class="ex-num">Ex. 16</span>
+    <span class="ex-title">Comparaison de fonctions — Croissances comparées</span>
+    <span class="ex-diff medium">Niveau 2</span>
+  </div>
+  <p>À l'aide des DL, établir les équivalents et comparer les vitesses de convergence :</p>
+  <p><strong>a)</strong> Montrer que \(\sin x - x \underset{x\to 0}{\sim} -\frac{x^3}{6}\).</p>
+  <p><strong>b)</strong> Montrer que \(e^x - 1 \underset{x\to 0}{\sim} x\) et que \(e^x - 1 - x \underset{x\to 0}{\sim} \frac{x^2}{2}\).</p>
+  <p><strong>c)</strong> Déterminer les réels \(\alpha, \beta, \gamma\) tels que \(\frac{\sin x - x + \alpha x^3}{x^5} \to \beta\) et calculer \(\gamma = \lim_{x\to 0}\frac{\cos x - 1 + \gamma x^2}{x^4}\).</p>
+  <button class="hint-btn" onclick="this.nextElementSibling.classList.toggle('visible'); this.textContent = this.nextElementSibling.classList.contains('visible') ? '🙈 Masquer l\'indice' : '💡 Voir l\'indice'">💡 Voir l'indice</button>
+  <div class="ex-hint">
+    <p><strong>a)</strong> DL de \(\sin x\) : \(x - \frac{x^3}{6} + o(x^3)\). Donc \(\sin x - x = -\frac{x^3}{6} + o(x^3) \sim -\frac{x^3}{6}\).</p>
+    <p><strong>b)</strong> DL d'ordre 1 : \(e^x = 1 + x + o(x)\) donne \(e^x - 1 = x + o(x) \sim x\). D'ordre 2 : reste dominant est \(\frac{x^2}{2}\).</p>
+    <p><strong>c)</strong> Pour la fraction \(\frac{\sin x - x + \alpha x^3}{x^5}\) : numérateur = \(-\frac{x^3}{6} + \frac{x^5}{120} + \alpha x^3 + o(x^5)\). Pour avoir une limite finie non nulle : \(\alpha = \frac{1}{6}\) (annuler le \(x^3\)), et \(\beta = \frac{1}{120}\). Pour le cosinus : \(\gamma = \frac{1}{2}\), et \(\lim = \frac{1}{24}\).</p>
+  </div>
+</div>
+
+<!-- Ex 17 -->
+<div class="exercise-card">
+  <div class="ex-header">
+    <span class="ex-num">Ex. 17</span>
+    <span class="ex-title">Courbe paramétrée — Cissoïde de Dioclès</span>
+    <span class="ex-diff medium">Niveau 2</span>
+  </div>
+  <p>On considère la <strong>cissoïde de Dioclès</strong> définie par : \(x(t) = \frac{2t^2}{1+t^2}\), \(y(t) = \frac{2t^3}{1+t^2}\), \(t \in \mathbb{R}\).</p>
+  <p><strong>1.</strong> Montrer que \(x(t) \in [0, 2[\) pour tout \(t\). Quelle est la limite quand \(t \to \pm\infty\) ?</p>
+  <p><strong>2.</strong> Étudier la parité et la symétrie. Réduire l'étude à \(t \geq 0\).</p>
+  <p><strong>3.</strong> Montrer que la courbe admet une asymptote verticale. Préciser son équation et la position de la courbe par rapport à cette asymptote.</p>
+  <p><strong>4.</strong> Étudier le point en \(t = 0\) et calculer la tangente.</p>
+  <button class="hint-btn" onclick="this.nextElementSibling.classList.toggle('visible'); this.textContent = this.nextElementSibling.classList.contains('visible') ? '🙈 Masquer l\'indice' : '💡 Voir l\'indice'">💡 Voir l'indice</button>
+  <div class="ex-hint">
+    <p><strong>1.</strong> \(x(t) = 2 - \frac{2}{1+t^2} \in [0, 2[\). Quand \(t \to \pm\infty\), \(x \to 2\) et \(y \to \pm\infty\). L'asymptote est \(x = 2\).</p>
+    <p><strong>2.</strong> \(x(-t) = x(t)\) (paire) et \(y(-t) = -y(t)\) (impaire) → symétrie par rapport à Ox. Étude sur \(t \geq 0\) suffit.</p>
+    <p><strong>3.</strong> Quand \(t \to +\infty\) : \(x \to 2^-\) et \(y \to +\infty\). L'asymptote est \(x = 2\). Puisque \(x(t) < 2\), la courbe reste à gauche de l'asymptote.</p>
+    <p><strong>4.</strong> En \(t=0\) : \(M = (0, 0)\). \(x'(0) = 0\) et \(y'(0) = 0\) → point stationnaire. DL : \(x \approx 2t^2\), \(y \approx 2t^3\), donc \(p=2 < q=3\), tangente horizontale, rebroussement de 1ère espèce.</p>
+  </div>
+</div>
+
+<!-- Ex 18 -->
+<div class="exercise-card">
+  <div class="ex-header">
+    <span class="ex-num">Ex. 18</span>
+    <span class="ex-title">Courbe paramétrée — Strophoïde droite</span>
+    <span class="ex-diff hard">Niveau 3</span>
+  </div>
+  <p>La <strong>strophoïde droite</strong> est définie par : \(x(t) = \frac{1-t^2}{1+t^2}\), \(y(t) = \frac{t(1-t^2)}{1+t^2}\), \(t \in \mathbb{R}\).</p>
+  <p><strong>1.</strong> Montrer que si \((x,y)\) est sur la courbe, alors \((x, -y)\) aussi (symétrie Ox).</p>
+  <p><strong>2.</strong> Déterminer la nature du point en \(t=0\) et \(t=1\). (Point double ?)</p>
+  <p><strong>3.</strong> Étudier les branches infinies (\(t \to \pm\infty\)) et trouver l'asymptote.</p>
+  <p><strong>4.</strong> Montrer que la courbe passe deux fois par l'origine. Trouver les deux valeurs de \(t\) correspondantes.</p>
+  <button class="hint-btn" onclick="this.nextElementSibling.classList.toggle('visible'); this.textContent = this.nextElementSibling.classList.contains('visible') ? '🙈 Masquer l\'indice' : '💡 Voir l\'indice'">💡 Voir l'indice</button>
+  <div class="ex-hint">
+    <p><strong>1.</strong> Calculer \(x(-t)\) et \(y(-t)\) : on trouve \(x(-t) = x(t)\) et \(y(-t) = -y(t)\). Donc symétrie par rapport à Ox.</p>
+    <p><strong>2.</strong> En \(t=1\) : \(x(1) = 0\) et \(y(1) = 0\) → la courbe passe par l'origine. Aussi \(t=-1\) : \(x(-1) = 0\) et \(y(-1) = 0\) → point double en l'origine.</p>
+    <p><strong>3.</strong> Quand \(t \to \pm\infty\) : \(x \to -1\) et \(y \to \mp\infty\). Asymptote verticale \(x = -1\).</p>
+    <p><strong>4.</strong> Résoudre \(x(t) = 0\) et \(y(t) = 0\) simultanément : \(1-t^2 = 0 \Rightarrow t = \pm 1\). Les deux tangentes en l'origine (en \(t = 1\) et \(t = -1\)) sont perpendiculaires.</p>
+  </div>
+</div>
+
+<!-- Ex 19 -->
+<div class="exercise-card">
+  <div class="ex-header">
+    <span class="ex-num">Ex. 19</span>
+    <span class="ex-title">Développement asymptotique et suite récurrente</span>
+    <span class="ex-diff hard">Niveau 3</span>
+  </div>
+  <p>Soit \((u_n)\) la suite définie par \(u_0 > 0\) et \(u_{n+1} = \sin(u_n)\).</p>
+  <p><strong>1.</strong> Montrer que si \(u_0 \in ]0, \pi[\), alors la suite est bien définie, positive, et décroissante vers 0.</p>
+  <p><strong>2.</strong> À l'aide du DL de \(\sin x\) en 0, montrer que \(u_{n+1} = u_n - \frac{u_n^3}{6} + o(u_n^3)\).</p>
+  <p><strong>3.</strong> Posant \(v_n = \frac{1}{u_n^2}\), montrer que \(v_{n+1} = v_n + \frac{1}{3} + o(1)\) quand \(n \to \infty\).</p>
+  <p><strong>4.</strong> En déduire que \(u_n \sim \sqrt{\frac{3}{n}}\) quand \(n \to +\infty\).</p>
+  <button class="hint-btn" onclick="this.nextElementSibling.classList.toggle('visible'); this.textContent = this.nextElementSibling.classList.contains('visible') ? '🙈 Masquer l\'indice' : '💡 Voir l\'indice'">💡 Voir l'indice</button>
+  <div class="ex-hint">
+    <p><strong>1.</strong> \(\sin\) envoie \(]0,\pi[\) dans \(]0, 1[\) et \(]0, 1[ \subset ]0, \pi[\). De plus \(\sin x < x\) pour \(x > 0\), donc la suite est strictement décroissante et minorée par 0 → elle converge. La seule limite possible dans \([0,\pi]\) est 0 (seul point fixe positif de sin).</p>
+    <p><strong>2.</strong> Appliquer directement le DL de sin en 0 : \(\sin(u_n) = u_n - \frac{u_n^3}{6} + o(u_n^3)\).</p>
+    <p><strong>3.</strong> \(v_{n+1} = \frac{1}{u_{n+1}^2} = \frac{1}{(u_n - u_n^3/6 + o(u_n^3))^2} = \frac{1}{u_n^2(1 - u_n^2/6 + o(u_n^2))^2} \approx \frac{1}{u_n^2}(1 + \frac{u_n^2}{3}) = v_n + \frac{1}{3} + o(1)\).</p>
+    <p><strong>4.</strong> Par le théorème de Cesàro, \(\frac{v_n}{n} \to \frac{1}{3}\), donc \(v_n \sim \frac{n}{3}\), d'où \(u_n^2 \sim \frac{3}{n}\), et \(u_n \sim \sqrt{\frac{3}{n}}\).</p>
+  </div>
+</div>
+
+<!-- Ex 20 -->
+<div class="exercise-card">
+  <div class="ex-header">
+    <span class="ex-num">Ex. 20</span>
+    <span class="ex-title">Problème de synthèse — Courbe et développements</span>
+    <span class="ex-diff hard">Niveau 3 ⭐</span>
+  </div>
+  <p>On considère la courbe paramétrée \(\mathcal{C}\) définie par :</p>
+  <div class="math-block centered">\[x(t) = \frac{t^3}{1+t^2},\quad y(t) = \frac{t^2}{1+t^2},\quad t\in\mathbb{R}.\]</div>
+  <p><strong>1.</strong> Montrer que \(y(t) \in [0, 1[\) pour tout \(t\). La courbe est-elle bornée ?</p>
+  <p><strong>2.</strong> Étudier les symétries. Réduire le domaine d'étude à \(t \geq 0\).</p>
+  <p><strong>3.</strong> Calculer \(x'(t)\) et \(y'(t)\). Montrer que le seul point stationnaire est \(t = 0\). Déterminer la tangente et la nature de ce point.</p>
+  <p><strong>4.</strong> Étudier la branche infinie en \(t \to +\infty\). Montrer qu'il existe une asymptote oblique et en donner l'équation. La courbe est-elle au-dessus ou en dessous de cette asymptote ?</p>
+  <p><strong>5.</strong> Dresser le tableau de variations et esquisser la courbe.</p>
+  <button class="hint-btn" onclick="this.nextElementSibling.classList.toggle('visible'); this.textContent = this.nextElementSibling.classList.contains('visible') ? '🙈 Masquer l\'indice' : '💡 Voir l\'indice'">💡 Voir l'indice</button>
+  <div class="ex-hint">
+    <p><strong>1.</strong> \(y = \frac{t^2}{1+t^2} = 1 - \frac{1}{1+t^2} \in [0, 1[\). La coordonnée \(x\) est non bornée (quand \(t \to \pm\infty\), \(x \to \pm\infty\)) donc la courbe n'est pas bornée.</p>
+    <p><strong>2.</strong> \(x(-t) = -x(t)\) (impaire) et \(y(-t) = y(t)\) (paire) → symétrie par rapport à Oy. Étude sur \(t \geq 0\).</p>
+    <p><strong>3.</strong> \(x'(t) = \frac{t^2(t^2+3)}{(1+t^2)^2} \geq 0\) et \(y'(t) = \frac{2t}{(1+t^2)^2}\). En \(t=0\) : \(x'=y'=0\). DL : \(x \approx t^3\), \(y \approx t^2\), donc \(p = 3 > q = 2\) → tangente verticale, rebroussement de 1ère espèce.</p>
+    <p><strong>4.</strong> Quand \(t \to +\infty\) : \(y/x = \frac{t^2/(1+t^2)}{t^3/(1+t^2)} = \frac{1}{t} \to 0\). Direction Ox. Chercher si \(y \to \ell\) : \(y \to 1\). Donc asymptote horizontale \(y = 1\). Position : \(y - 1 = -\frac{1}{1+t^2} < 0\) → courbe sous l'asymptote.</p>
+  </div>
+</div>
+
+<div class="callout method">
+<p><strong>✅ Récapitulatif des 20 exercices :</strong> Les exercices 1–5 couvrent les DL fondamentaux, 6–10 les courbes paramétrées, 11–14 (style Bibmath) approfondissent les DL, 15–16 traitent les applications géométriques, 17–18 étudient des courbes classiques, et 19–20 constituent des problèmes de synthèse de niveau avancé. Bonne révision !</p>
+</div>
+
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     CRÉDITS
+═══════════════════════════════════════════════════════ -->
+<hr class="sep"/>
+<section id="credits">
+<h2><span class="chapter-num">🏛️ Crédits</span> ENS Tétouan</h2>
+
+<div style="display:grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2rem 0;">
+  <div style="background: var(--bg3); border: 1px solid var(--border); border-radius: 14px; padding: 2rem; text-align: center;">
+    <div style="font-size: 2.5rem; margin-bottom: 1rem;">🏛️</div>
+    <div style="font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem;">Établissement</div>
+    <div style="font-family: var(--serif); font-size: 1.4rem; font-weight: 600; color: var(--text); margin-bottom: 0.25rem;">École Normale Supérieure</div>
+    <div style="font-size: 1.1rem; color: var(--accent2); font-weight: 600;">ENS Tétouan</div>
+    <div style="font-size: 13px; color: var(--muted); margin-top: 0.75rem;">Tétouan, Maroc</div>
+  </div>
+  <div style="background: var(--bg3); border: 1px solid var(--border); border-radius: 14px; padding: 2rem;">
+    <div style="font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem;">🎓 Encadrant pédagogique</div>
+    <div style="display: flex; align-items: center; gap: 14px; padding: 1rem; background: rgba(240,201,106,0.07); border: 1px solid rgba(240,201,106,0.2); border-radius: 10px;">
+      <div style="width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), var(--orange)); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; color: #1a1a24; flex-shrink: 0;">YA</div>
+      <div>
+        <div style="font-weight: 700; font-size: 15px; color: var(--gold2);">ACHTOUN Youssef</div>
+        <div style="font-size: 12px; color: var(--muted);">Encadrant — Enseignant-chercheur</div>
+        <div style="font-size: 12px; color: var(--muted);">Département Mathématiques</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="background: var(--bg3); border: 1px solid rgba(124,106,247,0.3); border-radius: 14px; padding: 2rem; margin: 1.5rem 0;">
+  <div style="font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 1.25rem;">✏️ Productrices du cours</div>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+    <div style="display: flex; align-items: center; gap: 14px; padding: 1rem; background: rgba(124,106,247,0.06); border: 1px solid rgba(124,106,247,0.2); border-radius: 10px;">
+      <div style="width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px; color: #fff; flex-shrink: 0;">KE</div>
+      <div>
+        <div style="font-weight: 700; font-size: 15px; color: var(--accent2);">ED-DAHBY Kholoud</div>
+        <div style="font-size: 12px; color: var(--muted);">Productrice — Étudiante LE-MATH</div>
+        <div style="font-size: 12px; color: var(--muted);">ENS Tétouan</div>
+      </div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 14px; padding: 1rem; background: rgba(52,217,179,0.06); border: 1px solid rgba(52,217,179,0.2); border-radius: 10px;">
+      <div style="width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--teal), var(--teal2)); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px; color: #0f0f13; flex-shrink: 0;">MH</div>
+      <div>
+        <div style="font-weight: 700; font-size: 15px; color: var(--teal2);">HAYOUNE Mariam</div>
+        <div style="font-size: 12px; color: var(--muted);">Productrice — Étudiante LE-MATH </div>
+        <div style="font-size: 12px; color: var(--muted);">ENS Tétouan</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="callout remark">
+<p><strong>À propos de ce document :</strong> Ce cours d'Analyse 3 a été conçu et produit dans le cadre des activités pédagogiques de l'École Normale Supérieure de Tétouan. Il couvre les chapitres sur les développements limités, les formules de Taylor et les courbes paramétrées planes, conformément au programme de Licence 1. Toute reproduction doit mentionner les productrices et l'établissement.</p>
+</div>
+
+<div style="text-align:center; margin-top: 2.5rem; padding: 2rem; border-top: 1px solid var(--border);">
+  <div style="font-family: var(--serif); font-size: 1.1rem; font-style: italic; color: var(--muted);">
+    "Les mathématiques sont le langage dans lequel Dieu a écrit l'Univers."
+  </div>
+  <div style="font-size: 12px; color: var(--muted); margin-top: 0.5rem; letter-spacing: 1px;">— Galileo Galilei</div>
+  <div style="margin-top: 1.5rem; font-size: 13px; color: var(--muted);">
+    © ENS Tétouan · Analyse 3 · ED-DAHBY Kholoud & HAYOUNE Mariam · Encadrant : ACHTOUN Youssef
+  </div>
+</div>
+</section>
+
+</main>
+
+<!-- ═══════════════════════════════════════════════════════
+     SCRIPTS
+═══════════════════════════════════════════════════════ -->
+<script>
+// ── THEME TOGGLE ──
+function toggleTheme() {
+  const body = document.body;
+  const icon = document.getElementById('theme-icon');
+  const label = document.getElementById('theme-label');
+  const isLight = body.classList.toggle('light-mode');
+  icon.textContent = isLight ? '🌙' : '☀️';
+  label.textContent = isLight ? 'Mode sombre' : 'Mode clair';
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  drawTaylor(); drawCurve();
+}
+
+// Restore saved theme (light mode by default)
+(function() {
+  const saved = localStorage.getItem('theme');
+  if (saved === 'dark') {
+    // user explicitly chose dark
+    document.getElementById('theme-icon').textContent = '☀️';
+    document.getElementById('theme-label').textContent = 'Mode clair';
+  } else {
+    // default: light mode
+    document.body.classList.add('light-mode');
+    document.getElementById('theme-icon').textContent = '🌙';
+    document.getElementById('theme-label').textContent = 'Mode sombre';
+  }
+})();
+
+// ── PDF DOWNLOAD ──
+function downloadPDF() {
+  const btn = document.getElementById('pdf-btn');
+  btn.textContent = '⏳ Préparation...';
+  btn.disabled = true;
+  setTimeout(() => {
+    window.print();
+    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Télécharger en PDF';
+    btn.disabled = false;
+  }, 300);
+}
+
+// ── ACTIVE NAV LINK ──
+const sections = document.querySelectorAll('section, div[id]');
+const navLinks = document.querySelectorAll('nav a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 120) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+
+// ── TAYLOR INTERACTIVE ──
+const taylorCanvas = document.getElementById('taylor-canvas');
+const tcx = taylorCanvas.getContext('2d');
+const orderSlider = document.getElementById('order-slider');
+const orderOut = document.getElementById('order-out');
+const funcSelect = document.getElementById('func-select');
+const legend = document.getElementById('legend');
+
+const COLORS = ['#7c6af7','#34d9b3','#f0c96a','#f87171','#60a5fa','#fb923c'];
+
+function factorial(n) { let r=1; for(let i=2;i<=n;i++) r*=i; return r; }
+
+function taylorApprox(x, order, func) {
+  switch(func) {
+    case 'sin': {
+      let s=0;
+      for(let k=0;k<=Math.floor(order/2);k++) {
+        let n=2*k+1; if(n>order) break;
+        s += Math.pow(-1,k)*Math.pow(x,n)/factorial(n);
+      }
+      return s;
+    }
+    case 'cos': {
+      let s=0;
+      for(let k=0;k<=Math.floor(order/2);k++) {
+        let n=2*k; if(n>order) break;
+        s += Math.pow(-1,k)*Math.pow(x,n)/factorial(n);
+      }
+      return s;
+    }
+    case 'exp': {
+      let s=0;
+      for(let k=0;k<=order;k++) s+=Math.pow(x,k)/factorial(k);
+      return s;
+    }
+    case 'ln': {
+      let s=0;
+      for(let k=1;k<=order;k++) s+=Math.pow(-1,k-1)*Math.pow(x,k)/k;
+      return s;
+    }
+  }
+}
+
+function trueFunc(x, func) {
+  switch(func) {
+    case 'sin': return Math.sin(x);
+    case 'cos': return Math.cos(x);
+    case 'exp': return Math.exp(x);
+    case 'ln': return Math.log(1+x);
+  }
+}
+
+function drawTaylor() {
+  const W = taylorCanvas.width, H = taylorCanvas.height;
+  tcx.clearRect(0,0,W,H);
+  const cx=W/2, cy=H/2;
+  const scale=45;
+  const order = parseInt(orderSlider.value);
+  const func = funcSelect.value;
+
+  // Grid
+  const isLight = document.body.classList.contains('light-mode');
+  tcx.strokeStyle= isLight ? '#d8d4ee' : '#1e1e28'; tcx.lineWidth=1;
+  for(let gx=-Math.floor(W/(2*scale));gx<=Math.floor(W/(2*scale));gx++) {
+    let px=cx+gx*scale;
+    tcx.beginPath(); tcx.moveTo(px,0); tcx.lineTo(px,H); tcx.stroke();
+  }
+  for(let gy=-Math.floor(H/(2*scale));gy<=Math.floor(H/(2*scale));gy++) {
+    let py=cy+gy*scale;
+    tcx.beginPath(); tcx.moveTo(0,py); tcx.lineTo(W,py); tcx.stroke();
+  }
+
+  // Axes
+  tcx.strokeStyle= isLight ? '#b8b0e0' : '#3a3a4e'; tcx.lineWidth=1.5;
+  tcx.beginPath(); tcx.moveTo(0,cy); tcx.lineTo(W,cy); tcx.stroke();
+  tcx.beginPath(); tcx.moveTo(cx,0); tcx.lineTo(cx,H); tcx.stroke();
+
+  // True function
+  const N=600;
+  const xMin=-W/(2*scale), xMax=W/(2*scale);
+  tcx.strokeStyle= isLight ? '#1a1828' : '#ffffff'; tcx.lineWidth=2; tcx.beginPath();
+  let started=false;
+  for(let i=0;i<=N;i++) {
+    let x=xMin+i*(xMax-xMin)/N;
+    let y=trueFunc(x,func);
+    let px=cx+x*scale, py=cy-y*scale;
+    if(!isFinite(y)||Math.abs(y)>10) { started=false; continue; }
+    if(!started) { tcx.moveTo(px,py); started=true; } else tcx.lineTo(px,py);
+  }
+  tcx.stroke();
+
+  // Taylor approximations
+  for(let o=1;o<=order;o+=(func==='sin'||func==='cos'?2:1)) {
+    let color=COLORS[Math.min(Math.floor((o-1)/2),COLORS.length-1)];
+    tcx.strokeStyle=color; tcx.lineWidth=1.5; tcx.setLineDash([4,3]);
+    tcx.beginPath(); started=false;
+    for(let i=0;i<=N;i++) {
+      let x=xMin+i*(xMax-xMin)/N;
+      let y=taylorApprox(x,o,func);
+      let px=cx+x*scale, py=cy-y*scale;
+      if(!isFinite(y)||Math.abs(y)>10) { started=false; continue; }
+      if(!started) { tcx.moveTo(px,py); started=true; } else tcx.lineTo(px,py);
+    }
+    tcx.stroke();
+    tcx.setLineDash([]);
+  }
+
+  // Legend
+  legend.innerHTML = `<div class="legend-item"><div class="legend-dot" style="background:#fff"></div>${func==='ln'?'ln(1+x)':func}(x) exact</div>` +
+    Array.from({length:Math.ceil(order/2)},(_,i)=>{
+      let o=1+i*2; if(func==='exp'||func==='ln') o=1+i;
+      if(o>order) return '';
+      return `<div class="legend-item"><div class="legend-dot" style="background:${COLORS[Math.min(i,COLORS.length-1)]};border-top:2px dashed ${COLORS[Math.min(i,COLORS.length-1)]}"></div>ordre ${o}</div>`;
+    }).join('');
+}
+
+function resizeTaylor() {
+  taylorCanvas.width = taylorCanvas.offsetWidth;
+  taylorCanvas.height = 300;
+  drawTaylor();
+}
+
+orderSlider.addEventListener('input', () => { orderOut.textContent=orderSlider.value; drawTaylor(); });
+funcSelect.addEventListener('change', drawTaylor);
+window.addEventListener('resize', resizeTaylor);
+setTimeout(resizeTaylor, 200);
+
+// ── CURVE WIDGET ──
+const curveCanvas = document.getElementById('curve-canvas');
+const cctx = curveCanvas.getContext('2d');
+const curveSelect = document.getElementById('curve-select');
+const trangeSlider = document.getElementById('trange-slider');
+const tLabel = document.getElementById('t-label');
+const curveDesc = document.getElementById('curve-desc');
+
+const CURVES = {
+  astroid: {
+    label: 'x = cos³(t), y = sin³(t), t ∈ [0, 2π] — Points de rebroussement en t = 0, π/2, π, 3π/2',
+    fn: t => [Math.pow(Math.cos(t),3)*80, Math.pow(Math.sin(t),3)*80],
+    tMin: 0, tMax: 2*Math.PI
+  },
+  cycloid: {
+    label: 'x = t - sin(t), y = 1 - cos(t), t ∈ [0, 4π] — Points de rebroussement en t = 0, 2π, 4π',
+    fn: t => [(t - Math.sin(t))*35 - 220, -(1-Math.cos(t))*70 + 60],
+    tMin: 0, tMax: 4*Math.PI
+  },
+  lemniscate: {
+    label: 'x = cos(t)/(1+sin²(t)), y = sin(t)cos(t)/(1+sin²(t)) — Courbe en ∞',
+    fn: t => { let d=1+Math.sin(t)*Math.sin(t); return [Math.cos(t)/d*150, Math.sin(t)*Math.cos(t)/d*150]; },
+    tMin: 0, tMax: 2*Math.PI
+  },
+  cardioid: {
+    label: 'x = (1-cos(t))cos(t), y = (1-cos(t))sin(t) — Cardioïde, point de rebroussement en t=0',
+    fn: t => { let r=1-Math.cos(t); return [r*Math.cos(t)*80, r*Math.sin(t)*80]; },
+    tMin: 0, tMax: 2*Math.PI
+  },
+  cusp: {
+    label: 'x = t², y = t³ — Cubique semi-cubique, rebroussement de 1ère espèce en (0,0)',
+    fn: t => [t*t*60, -t*t*t*35],
+    tMin: -2.5, tMax: 2.5
+  }
+};
+
+function drawCurve() {
+  const W = curveCanvas.width, H = curveCanvas.height;
+  cctx.clearRect(0,0,W,H);
+  const cx=W/2, cy=H/2;
+  const curve = CURVES[curveSelect.value];
+  curveDesc.textContent = curve.label;
+
+  // Grid
+  const isLightC = document.body.classList.contains('light-mode');
+  cctx.strokeStyle= isLightC ? '#d8d4ee' : '#1e1e28'; cctx.lineWidth=0.8;
+  for(let gx=0;gx<=W;gx+=40) { cctx.beginPath(); cctx.moveTo(gx,0); cctx.lineTo(gx,H); cctx.stroke(); }
+  for(let gy=0;gy<=H;gy+=40) { cctx.beginPath(); cctx.moveTo(0,gy); cctx.lineTo(W,gy); cctx.stroke(); }
+
+  // Axes
+  cctx.strokeStyle= isLightC ? '#b8b0e0' : '#3a3a4e'; cctx.lineWidth=1.5;
+  cctx.beginPath(); cctx.moveTo(0,cy); cctx.lineTo(W,cy); cctx.stroke();
+  cctx.beginPath(); cctx.moveTo(cx,0); cctx.lineTo(cx,H); cctx.stroke();
+
+  // Curve
+  const pct = parseInt(trangeSlider.value)/100;
+  const tMin=curve.tMin, tMax=curve.tMin+(curve.tMax-curve.tMin)*pct;
+  const N=600;
+  const grad = cctx.createLinearGradient(0,0,W,0);
+  grad.addColorStop(0,'#7c6af7'); grad.addColorStop(0.5,'#34d9b3'); grad.addColorStop(1,'#f0c96a');
+  cctx.strokeStyle=grad; cctx.lineWidth=2.5; cctx.beginPath();
+  let started=false;
+  for(let i=0;i<=N;i++) {
+    let t=tMin+i*(tMax-tMin)/N;
+    let [dx,dy]=curve.fn(t);
+    let px=cx+dx, py=cy-dy;
+    if(!isFinite(px)||!isFinite(py)) { started=false; continue; }
+    if(!started) { cctx.moveTo(px,py); started=true; } else cctx.lineTo(px,py);
+  }
+  cctx.stroke();
+
+  // Dot at current t
+  let [ex,ey]=curve.fn(tMax);
+  cctx.fillStyle='#f0c96a'; cctx.beginPath();
+  cctx.arc(cx+ex, cy-ey, 5, 0, Math.PI*2); cctx.fill();
+}
+
+function resizeCurve() {
+  curveCanvas.width = curveCanvas.offsetWidth;
+  curveCanvas.height = 300;
+  drawCurve();
+}
+
+trangeSlider.addEventListener('input', () => { tLabel.textContent=trangeSlider.value+'%'; drawCurve(); });
+curveSelect.addEventListener('change', drawCurve);
+window.addEventListener('resize', resizeCurve);
+setTimeout(resizeCurve, 300);
+</script>
+</body>
+</html>
